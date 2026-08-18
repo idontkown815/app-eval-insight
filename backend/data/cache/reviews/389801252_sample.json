@@ -1,0 +1,407 @@
+[
+  {
+    "review_id": "r_389801252_001",
+    "author": "IGUser001",
+    "rating": 1,
+    "title": "算法推荐太糟糕了",
+    "content": "The algorithm recommendations are terrible! 我根本不感兴趣的内容一直出现在我的首页。算法推荐完全不考虑我实际关注和点赞的内容。请修复算法逻辑，stop showing me random posts!",
+    "review_date": "2026-08-15T10:00:00Z",
+    "version": "453"
+  },
+  {
+    "review_id": "r_389801252_002",
+    "author": "IGUser002",
+    "rating": 5,
+    "title": "视觉效果太棒了",
+    "content": "The visual effects are absolutely amazing! 滤镜种类丰富，照片编辑功能强大，我能做出专业级别的图片。视觉设计一直是 Instagram 的核心优势，perfect for creative people who love sharing beautiful content.",
+    "review_date": "2026-08-14T15:30:00Z",
+    "version": "453"
+  },
+  {
+    "review_id": "r_389801252_003",
+    "author": "IGUser003",
+    "rating": 3,
+    "title": "还行吧，一般般",
+    "content": "还行吧，就是一个普通的社交软件。Not bad but not exceptional either. 功能中规中矩，界面变化不大。整体就是average的体验，没有什么让我特别惊喜的地方。",
+    "review_date": "2026-08-13T11:45:00Z",
+    "version": "452"
+  },
+  {
+    "review_id": "r_389801252_004",
+    "author": "IGUser004",
+    "rating": 2,
+    "title": "Story加载太慢了",
+    "content": "Stories load so slowly! I have to wait 10 seconds for each story to load. 有时候故事加载到一半就卡住了，特别是视频story。My network is fine, all other apps work fast. Fix the story loading issue please.",
+    "review_date": "2026-08-12T18:20:00Z",
+    "version": "452"
+  },
+  {
+    "review_id": "r_389801252_005",
+    "author": "IGUser005",
+    "rating": 5,
+    "title": "社交连接做得很好",
+    "content": "Excellent social connection features! 我通过Instagram认识了很多志同道合的朋友。The ability to connect with creators and brands directly is amazing. 私信功能也很棒，方便和朋友日常互动分享生活点滴。",
+    "review_date": "2026-08-11T09:15:00Z",
+    "version": "452"
+  },
+  {
+    "review_id": "r_389801252_006",
+    "author": "IGUser006",
+    "rating": 1,
+    "title": "隐私问题令人担忧",
+    "content": "Major privacy concerns! My DMs keep showing read status even though I turned it off. 隐私设置经常自己重置，有人能看到我在线状态明明设置了隐藏。These privacy bugs are really making me consider deleting my account.",
+    "review_date": "2026-08-10T20:30:00Z",
+    "version": "451"
+  },
+  {
+    "review_id": "r_389801252_007",
+    "author": "IGUser007",
+    "rating": 4,
+    "title": "Reels功能挺有趣的",
+    "content": "Reels are actually really fun! I love discovering new creators through short videos. 算法推荐有时候还挺准的，能发现我感兴趣的内容。Great for entertainment and learning new things. Easy to use interface too.",
+    "review_date": "2026-08-09T14:00:00Z",
+    "version": "451"
+  },
+  {
+    "review_id": "r_389801252_008",
+    "author": "IGUser008",
+    "rating": 2,
+    "title": "广告太多了受不了",
+    "content": "Way too many ads! I see an ad every 4th post and ads in stories too. So many sponsored Reels that I have zero interest in. 广告数量已经超过正常内容了，体验越来越差。Please stop flooding us with ads!",
+    "review_date": "2026-08-08T16:45:00Z",
+    "version": "451"
+  },
+  {
+    "review_id": "r_389801252_009",
+    "author": "IGUser009",
+    "rating": 5,
+    "title": "滤镜效果超赞",
+    "content": "The filter effects are incredible! AR filters make stories so much fun. 滤镜种类越来越多，质量也很高，特别适合自拍和风景照。I love how easy it is to transform ordinary photos into beautiful ones with just one tap.",
+    "review_date": "2026-08-07T10:30:00Z",
+    "version": "450"
+  },
+  {
+    "review_id": "r_389801252_010",
+    "author": "IGUser010",
+    "rating": 1,
+    "title": "Story功能有bug",
+    "content": "Serious story bug! 我发的story有时候根本发不出去，显示发送成功但没人能看到。Sometimes when I reply to stories the message goes missing. 还有点赞数显示错误。这些story bug太影响使用了！",
+    "review_date": "2026-08-06T13:15:00Z",
+    "version": "450"
+  },
+  {
+    "review_id": "r_389801252_011",
+    "author": "IGUser011",
+    "rating": 3,
+    "title": "普通的社交应用",
+    "content": "普通的社交应用吧，能用就行。Normal features for photo sharing. Nothing particularly outstanding but nothing terrible either. 用了很多年已经习惯了，就是average experience。",
+    "review_date": "2026-08-05T08:00:00Z",
+    "version": "453"
+  },
+  {
+    "review_id": "r_389801252_012",
+    "author": "IGUser012",
+    "rating": 2,
+    "title": "Reels算法推荐差",
+    "content": "Reels algorithm is broken! I keep getting the same 10 creators over and over. 如果我点赞了一个宠物视频，接下来全是宠物相关的。The algorithm recommendations have no variety at all. 推荐系统需要好好改善一下。",
+    "review_date": "2026-08-04T19:30:00Z",
+    "version": "453"
+  },
+  {
+    "review_id": "r_389801252_013",
+    "author": "IGUser013",
+    "rating": 4,
+    "title": "视觉设计一直在线",
+    "content": "The visual design is always on point! Clean, beautiful interface that puts photos front and center. 视觉效果一直是这个平台最吸引人的地方。Good for building a personal brand aesthetic. Great photo and video quality preservation.",
+    "review_date": "2026-08-03T11:20:00Z",
+    "version": "452"
+  },
+  {
+    "review_id": "r_389801252_014",
+    "author": "IGUser014",
+    "rating": 1,
+    "title": "隐私设置经常失效",
+    "content": "Privacy settings keep resetting! I set my account to private then it randomly becomes public. 我明明关闭了activity status但是别人还是能看到我什么时候在线。These privacy issues are unacceptable for a major social platform. 令人担忧！",
+    "review_date": "2026-08-02T15:45:00Z",
+    "version": "452"
+  },
+  {
+    "review_id": "r_389801252_015",
+    "author": "IGUser015",
+    "rating": 3,
+    "title": "还行，能满足基本需求",
+    "content": "还行，勉强能满足我的基本需求吧。OK for sharing daily photos. 功能还算齐全，就是广告多了点。Not bad overall, normal social media experience. 希望以后能少一点广告。",
+    "review_date": "2026-08-01T12:30:00Z",
+    "version": "451"
+  },
+  {
+    "review_id": "r_389801252_016",
+    "author": "IGUser016",
+    "rating": 2,
+    "title": "Story加载经常失败",
+    "content": "Story loading constantly fails! 点击story后一直转圈加载不出来。有时候加载出来没有声音。Video stories are especially problematic, they buffer forever. This story loading bug is so frustrating daily!",
+    "review_date": "2026-07-31T17:00:00Z",
+    "version": "451"
+  },
+  {
+    "review_id": "r_389801252_017",
+    "author": "IGUser017",
+    "rating": 5,
+    "title": "和朋友互动很棒",
+    "content": "Great way to interact with friends! Stories let me share my day and see what others are up to. 社交连接功能做得很好，通过互动贴纸能和朋友玩在一起。DM功能也很流畅，分享聊天很方便。",
+    "review_date": "2026-07-30T09:45:00Z",
+    "version": "450"
+  },
+  {
+    "review_id": "r_389801252_018",
+    "author": "IGUser018",
+    "rating": 1,
+    "title": "广告质量差还多",
+    "content": "Ads are everywhere and they're terrible quality! 同一个广告我一天看了20遍。广告内容和我兴趣完全不相关。Too many ads make the app feel cheap and annoying. 能不能让用户选择减少广告？",
+    "review_date": "2026-07-29T20:15:00Z",
+    "version": "450"
+  },
+  {
+    "review_id": "r_389801252_019",
+    "author": "IGUser019",
+    "rating": 4,
+    "title": "Reels看视频很好玩",
+    "content": "Reels section is super entertaining! I can watch interesting short videos for hours. 发现了很多有趣的创作者和内容。The editing tools for creating Reels are easy to use and powerful. 很棒的功能！",
+    "review_date": "2026-07-28T14:30:00Z",
+    "version": "453"
+  },
+  {
+    "review_id": "r_389801252_020",
+    "author": "IGUser020",
+    "rating": 3,
+    "title": "整体还行吧",
+    "content": "整体还行吧，说不上特别好也说不上差。Normal app with average features. 我每天都刷一会儿但是不会沉迷。Just your typical photo sharing social platform, 中规中矩的体验。",
+    "review_date": "2026-07-27T10:00:00Z",
+    "version": "453"
+  },
+  {
+    "review_id": "r_389801252_021",
+    "author": "IGUser021",
+    "rating": 1,
+    "title": "算法推荐完全跑偏",
+    "content": "Algorithm recommendations are completely off! I follow 50 artists and photographers but my feed shows zero of them. Instead the algorithm keeps pushing random viral trash. 算法推荐系统完全坏掉了，give us chronological feed back!",
+    "review_date": "2026-07-26T18:20:00Z",
+    "version": "452"
+  },
+  {
+    "review_id": "r_389801252_022",
+    "author": "IGUser022",
+    "rating": 5,
+    "title": "滤镜和贴纸都很棒",
+    "content": "The filters and stickers collection is fantastic! So many creative options for making unique content. 视觉效果真的很棒，我每次发照片都能调出喜欢的感觉。AR贴纸特别好玩，朋友互动性很强。",
+    "review_date": "2026-07-25T11:30:00Z",
+    "version": "452"
+  },
+  {
+    "review_id": "r_389801252_023",
+    "author": "IGUser023",
+    "rating": 2,
+    "title": "Story bug真的很多",
+    "content": "So many story bugs! 我给story加的音乐经常不播放。Poll贴纸有时候显示不了结果。还有story观看列表不对，有些看了的人不在列表里。这些story bug已经持续几个月了还没修。",
+    "review_date": "2026-07-24T16:00:00Z",
+    "version": "451"
+  },
+  {
+    "review_id": "r_389801252_024",
+    "author": "IGUser024",
+    "rating": 4,
+    "title": "记录生活的好工具",
+    "content": "Wonderful tool for recording daily life! I love sharing my journey through photos and stories. 社交连接让我和远方的朋友保持联系。The visual quality and editing features are top notch for mobile photography enthusiasts.",
+    "review_date": "2026-07-23T08:45:00Z",
+    "version": "451"
+  },
+  {
+    "review_id": "r_389801252_025",
+    "author": "IGUser025",
+    "rating": 3,
+    "title": "普普通通吧",
+    "content": "普普通通吧，该有的功能都有。Average social experience overall. 偶尔发现一些小bug但不影响使用。就是广告有点太多了，希望能改善。普通日常使用没问题。",
+    "review_date": "2026-07-22T13:15:00Z",
+    "version": "450"
+  },
+  {
+    "review_id": "r_389801252_026",
+    "author": "IGUser026",
+    "rating": 1,
+    "title": "隐私问题严重",
+    "content": "Serious privacy violations! My blocked accounts can still see my stories somehow. 我设置了仅粉丝可见但陌生人能浏览我的内容。还有location tag关不掉。These privacy bugs need immediate attention. 用户隐私太重要了。",
+    "review_date": "2026-07-21T21:30:00Z",
+    "version": "450"
+  },
+  {
+    "review_id": "r_389801252_027",
+    "author": "IGUser027",
+    "rating": 5,
+    "title": "Reels创意十足",
+    "content": "Reels are so creative and fun! I've learned so many new things from watching Reels - cooking, crafts, travel tips. 算法有时候推荐内容还挺有意思的。Great entertainment value. The editing tools make it easy to create fun content too.",
+    "review_date": "2026-07-20T10:15:00Z",
+    "version": "453"
+  },
+  {
+    "review_id": "r_389801252_028",
+    "author": "IGUser028",
+    "rating": 2,
+    "title": "Story视频加载慢",
+    "content": "Video stories take forever to load! I have good WiFi but 4K story videos buffer constantly. Story加载速度对比其他App慢很多。Sometimes the story won't load at all and I have to restart the app. 非常影响使用体验。",
+    "review_date": "2026-07-19T15:45:00Z",
+    "version": "453"
+  },
+  {
+    "review_id": "r_389801252_029",
+    "author": "IGUser029",
+    "rating": 4,
+    "title": "视觉呈现很精美",
+    "content": "Beautiful visual presentation throughout the app! Photo carousel looks elegant, stories are immersive. 视觉设计一直保持高水准。It really feels premium when sharing high quality content. Great for photographers and creators.",
+    "review_date": "2026-07-18T09:00:00Z",
+    "version": "452"
+  },
+  {
+    "review_id": "r_389801252_030",
+    "author": "IGUser030",
+    "rating": 3,
+    "title": "还行，没什么特别",
+    "content": "还行，没什么特别的。OK application, nothing special. 能用，但也谈不上多喜欢。Average user experience with the usual social media problems. I check it daily out of habit more than enjoyment.",
+    "review_date": "2026-07-17T12:45:00Z",
+    "version": "452"
+  },
+  {
+    "review_id": "r_389801252_031",
+    "author": "IGUser031",
+    "rating": 1,
+    "title": "算法推荐垃圾",
+    "content": "The algorithm is garbage! It keeps showing me content from people I don't follow and have zero interest in. I never see posts from my actual friends anymore. 算法推荐需要彻底重做，现在完全没用！",
+    "review_date": "2026-07-16T19:00:00Z",
+    "version": "451"
+  },
+  {
+    "review_id": "r_389801252_032",
+    "author": "IGUser032",
+    "rating": 5,
+    "title": "社交连接我的生活",
+    "content": "This app connects my social life beautifully! I can keep up with all my friends through stories and posts. 社交功能做得很好，私信和群组功能都很实用。It's my favorite way to share moments and stay connected with my circle.",
+    "review_date": "2026-07-15T14:30:00Z",
+    "version": "451"
+  },
+  {
+    "review_id": "r_389801252_033",
+    "author": "IGUser033",
+    "rating": 2,
+    "title": "广告和赞助内容太多",
+    "content": "Ads and sponsored content everywhere now! Between posts, stories, reels, explore page - I can't escape ads. 广告占了我80%的feed内容。It's too much, I'm starting to hate opening the app. Please reduce广告密度！",
+    "review_date": "2026-07-14T17:15:00Z",
+    "version": "450"
+  },
+  {
+    "review_id": "r_389801252_034",
+    "author": "IGUser034",
+    "rating": 4,
+    "title": "滤镜效果一流",
+    "content": "First class filter effects! No other social app has such high quality filters consistently. 视觉效果真的是业界领先，每次用都很满意。Editing suite is easy to use yet powerful enough to create professional looking posts.",
+    "review_date": "2026-07-13T10:45:00Z",
+    "version": "450"
+  },
+  {
+    "review_id": "r_389801252_035",
+    "author": "IGUser035",
+    "rating": 3,
+    "title": "凑合能用吧",
+    "content": "凑合能用吧，日常刷刷没问题。Normal social platform, average everything. 有一些小问题但也能接受。Not great, not terrible - it is what it is. 就是一个普通的图片分享应用。",
+    "review_date": "2026-07-12T16:00:00Z",
+    "version": "453"
+  },
+  {
+    "review_id": "r_389801252_036",
+    "author": "IGUser036",
+    "rating": 1,
+    "title": "Story有严重Bug",
+    "content": "Critical story bug: 我发的story在我自己这能看到，但粉丝说看不到！连续三天了都是这个问题。I tried reposting, reinstalling, logging out - nothing fixes the story visibility bug. 严重影响工作！",
+    "review_date": "2026-07-11T11:30:00Z",
+    "version": "453"
+  },
+  {
+    "review_id": "r_389801252_037",
+    "author": "IGUser037",
+    "rating": 5,
+    "title": "Reels真的很有趣",
+    "content": "Reels is genuinely fun! The short video format is addictive and I've discovered so many great creators. 创作工具也很顺手，加上音乐和特效很好玩。Social connection through shared trends and audio is brilliant concept.",
+    "review_date": "2026-07-10T13:20:00Z",
+    "version": "452"
+  },
+  {
+    "review_id": "r_389801252_038",
+    "author": "IGUser038",
+    "rating": 2,
+    "title": "算法推荐毫无逻辑",
+    "content": "Algorithm recommendations make no sense! 我点赞了旅行内容结果推荐一堆美妆视频。No logic to what appears on my explore page or reels. 算法还不如随机推荐呢。Give users the option to disable algorithmic suggestions.",
+    "review_date": "2026-07-09T18:45:00Z",
+    "version": "452"
+  },
+  {
+    "review_id": "r_389801252_039",
+    "author": "IGUser039",
+    "rating": 4,
+    "title": "和朋友分享日常很好",
+    "content": "Perfect for sharing daily moments with friends! Stories let me post quick updates without cluttering my feed. 社交连接做得很好，互动贴纸增加了趣味性。Overall great experience for keeping up with my loved ones visually.",
+    "review_date": "2026-07-08T09:30:00Z",
+    "version": "451"
+  },
+  {
+    "review_id": "r_389801252_040",
+    "author": "IGUser040",
+    "rating": 3,
+    "title": "体验一般般",
+    "content": "体验一般般，不好不坏。Average experience really. 能满足基本的图片分享需求，但是惊喜不多。Normal social media app with the usual flaws and features. 中规中矩用着吧。",
+    "review_date": "2026-07-07T15:00:00Z",
+    "version": "451"
+  },
+  {
+    "review_id": "r_389801252_041",
+    "author": "IGUser041",
+    "rating": 1,
+    "title": "隐私泄露风险",
+    "content": "Privacy leakage risk is real! 我的账号明明是私密账号，但是陌生人可以保存我的照片。还有通讯录被自动读取了我都没授权。These privacy issues are extremely concerning and need to be fixed immediately. 隐私太令人担忧了。",
+    "review_date": "2026-07-06T20:30:00Z",
+    "version": "450"
+  },
+  {
+    "review_id": "r_389801252_042",
+    "author": "IGUser042",
+    "rating": 5,
+    "title": "视觉体验一流",
+    "content": "Top notch visual experience! The app is gorgeous to use. 照片展示效果非常精美，完全不压缩画质这点很棒。滤镜种类多质量高，视觉设计一直在进步。Love the clean aesthetic focusing on imagery.",
+    "review_date": "2026-07-05T11:15:00Z",
+    "version": "450"
+  },
+  {
+    "review_id": "r_389801252_043",
+    "author": "IGUser043",
+    "rating": 2,
+    "title": "广告无处不在",
+    "content": "Ads are literally everywhere! I can't scroll 2 posts without hitting an ad. Stories have ads between every 3 people. Reels is basically 50% ads now. 广告体验已经完全毁掉了这个App。I'm considering leaving.",
+    "review_date": "2026-07-04T14:00:00Z",
+    "version": "453"
+  },
+  {
+    "review_id": "r_389801252_044",
+    "author": "IGUser044",
+    "rating": 4,
+    "title": "社交互动很棒",
+    "content": "Wonderful social interaction experience! I love the sticker interactions on stories - polls, Q&A, quizzes make it fun. 社交连接功能完善，方便和朋友们保持日常互动。Great community features overall.",
+    "review_date": "2026-07-03T10:30:00Z",
+    "version": "453"
+  },
+  {
+    "review_id": "r_389801252_045",
+    "author": "IGUser045",
+    "rating": 3,
+    "title": "整体表现普通",
+    "content": "整体表现普通，就是一个常规的社交平台。Not bad, average quality. 图片分享是核心功能还不错，其他新增功能就马马虎虎了。Normal day-to-day use is fine. 没什么值得特别表扬的地方。",
+    "review_date": "2026-07-02T13:45:00Z",
+    "version": "452"
+  }
+]

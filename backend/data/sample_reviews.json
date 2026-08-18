@@ -1,0 +1,139 @@
+{
+  "reviews": [
+    {
+      "review_id": "r_json_001",
+      "author": "Importer01",
+      "rating": 5,
+      "title": "Absolutely love this app",
+      "content": "Absolutely love this application! The design is beautiful and everything works perfectly. It's amazing how easy it is to connect with friends and share our daily moments together. Highly recommended for everyone!",
+      "review_date": "2026-08-15T08:30:00Z",
+      "version": "453"
+    },
+    {
+      "review_id": "r_json_002",
+      "author": "Importer02",
+      "rating": 1,
+      "title": "App crashes constantly",
+      "content": "The app crashes every time I try to use it. I open it, try to do anything and boom it crashes immediately. Tried restarting my phone, clearing cache, reinstalling - nothing fixes these crashes. Unusable right now!",
+      "review_date": "2026-08-14T15:45:00Z",
+      "version": "453"
+    },
+    {
+      "review_id": "r_json_003",
+      "author": "Importer03",
+      "rating": 3,
+      "title": "Not bad, could be better",
+      "content": "Not bad overall. It does what it says it does. The features are average, performance is okay, nothing particularly stands out as great or terrible. Just a normal average social app I guess.",
+      "review_date": "2026-08-13T10:20:00Z",
+      "version": "452"
+    },
+    {
+      "review_id": "r_json_004",
+      "author": "Importer04",
+      "rating": 2,
+      "title": "Very slow performance",
+      "content": "Performance is extremely slow in this version. Loading the feed takes forever, scrolling is laggy, images load slowly. I have a flagship phone so it's definitely not my device. Please optimize the app performance!",
+      "review_date": "2026-08-12T19:00:00Z",
+      "version": "452"
+    },
+    {
+      "review_id": "r_json_005",
+      "author": "Importer05",
+      "rating": 4,
+      "title": "Great features overall",
+      "content": "Great feature set overall! I especially love the photo editing tools and the ability to create albums easily. Sharing with friends is intuitive and the interface feels clean. Only minor bugs here and there.",
+      "review_date": "2026-08-11T12:15:00Z",
+      "version": "452"
+    },
+    {
+      "review_id": "r_json_006",
+      "author": "Importer06",
+      "rating": 1,
+      "title": "Login problems persist",
+      "content": "I've been having login issues for 2 weeks now! Every time I enter my correct password it says invalid credentials. I've reset my password 5 times already. Customer support hasn't replied to any of my messages. This is unacceptable.",
+      "review_date": "2026-08-10T17:30:00Z",
+      "version": "451"
+    },
+    {
+      "review_id": "r_json_007",
+      "author": "Importer07",
+      "rating": 5,
+      "title": "Perfect for my family",
+      "content": "This is perfect for staying in touch with my entire family! We share photos, video call each other, and plan events all through this app. The interface is easy to use that even my parents can navigate it without problems.",
+      "review_date": "2026-08-09T09:45:00Z",
+      "version": "451"
+    },
+    {
+      "review_id": "r_json_008",
+      "author": "Importer08",
+      "rating": 2,
+      "title": "Battery draining fast",
+      "content": "My battery drains so fast with this app! I lose 30% battery in just an hour of browsing. The app is also making my phone get really hot which is concerning. Please look into the battery drain issue.",
+      "review_date": "2026-08-08T20:15:00Z",
+      "version": "451"
+    },
+    {
+      "review_id": "r_json_009",
+      "author": "Importer09",
+      "rating": 3,
+      "title": "Average social media app",
+      "content": "It's an average social media application. Works fine for the most part, I've experienced worse. Some features are nice but there's nothing that makes me go wow. Just normal everyday usage really.",
+      "review_date": "2026-08-07T11:00:00Z",
+      "version": "450"
+    },
+    {
+      "review_id": "r_json_010",
+      "author": "Importer10",
+      "rating": 1,
+      "title": "Too many ads everywhere",
+      "content": "Ads ads and more ads! I can't go 30 seconds without seeing an advertisement. They're in my feed, in stories, between messages, everywhere. The experience is completely broken now. I'm considering deleting the app.",
+      "review_date": "2026-08-06T14:30:00Z",
+      "version": "450"
+    },
+    {
+      "review_id": "r_json_011",
+      "author": "Importer11",
+      "rating": 4,
+      "title": "Really enjoying the updates",
+      "content": "Really enjoying the latest updates! The new interface changes are welcome and performance has definitely improved from earlier versions. Keep up the good work, this is becoming one of my favorite apps.",
+      "review_date": "2026-08-05T16:00:00Z",
+      "version": "453"
+    },
+    {
+      "review_id": "r_json_012",
+      "author": "Importer12",
+      "rating": 2,
+      "title": "Videos freeze all the time",
+      "content": "Videos freeze constantly when I try to watch them. They start playing then pause for buffering every 2 seconds. Sometimes the whole app freezes and I have to force close it. Very frustrating bug.",
+      "review_date": "2026-08-04T18:45:00Z",
+      "version": "453"
+    },
+    {
+      "review_id": "r_json_013",
+      "author": "Importer13",
+      "rating": 5,
+      "title": "Amazing for creators",
+      "content": "This platform is amazing for content creators! The tools available help me make professional looking posts. I love connecting with my audience and the analytics give great insights. Easy to use creation suite.",
+      "review_date": "2026-08-03T10:30:00Z",
+      "version": "452"
+    },
+    {
+      "review_id": "r_json_014",
+      "author": "Importer14",
+      "rating": 3,
+      "title": "It's okay, gets the job done",
+      "content": "It's okay honestly. The app gets the job done for basic social networking needs. I wish some features worked better but overall it's acceptable. Not a great experience but not a bad one either.",
+      "review_date": "2026-08-02T13:15:00Z",
+      "version": "452"
+    },
+    {
+      "review_id": "r_json_015",
+      "author": "Importer15",
+      "rating": 1,
+      "title": "Notifications are broken",
+      "content": "The notifications system is completely broken! I get duplicate notifications, then some never arrive at all. The badge on the app icon never clears even after I read everything. This bug has been here way too long.",
+      "review_date": "2026-08-01T07:45:00Z",
+      "version": "451"
+    }
+  ]
+}

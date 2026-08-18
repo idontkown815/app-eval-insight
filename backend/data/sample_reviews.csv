@@ -1,0 +1,11 @@
+review_id,author,rating,title,content,review_date,version
+r_sample_001,TestUser01,5,"Great app overall","This is a really great application! I love the features and the interface is easy to use. Would definitely recommend to friends and family.",2026-08-10T09:00:00Z,450
+r_sample_002,TestUser02,1,"Constant crashes","The app keeps crashing every time I try to open it. I have reinstalled it 3 times but the crash problem persists. Very frustrating experience!",2026-08-09T14:30:00Z,451
+r_sample_003,TestUser03,3,"It's okay I guess","The app works fine for basic tasks. Nothing amazing but also nothing terrible. It's just an average experience overall.",2026-08-08T11:15:00Z,450
+r_sample_004,TestUser04,2,"Too many ads now","There are way too many ads in this app now. I see an ad every other post and it's really slowing down my experience. Please reduce ads.",2026-08-07T16:45:00Z,452
+r_sample_005,TestUser05,4,"Love the new features","I really love the new features added in the latest version! The photo editing tools are great and sharing with friends is super easy.",2026-08-06T10:00:00Z,452
+r_sample_006,TestUser06,1,"Login issues again","Having serious login issues. It keeps saying my password is wrong even though I just changed it. The login screen also freezes sometimes when trying to submit.",2026-08-05T19:30:00Z,451
+r_sample_007,TestUser07,5,"Perfect for connecting","Perfect app for staying connected with my friends and family! The video calls work great and messaging is fast and reliable. Easy to use interface.",2026-08-04T13:20:00Z,453
+r_sample_008,TestUser08,2,"Battery drain is bad","Major battery drain issue with this version. My phone dies within 4 hours when using this app even just for browsing. Please optimize power usage.",2026-08-03T17:00:00Z,453
+r_sample_009,TestUser09,3,"Average experience","Average experience with this app. It does what it's supposed to do but I feel it could be better. Not bad but not great either - just normal.",2026-08-02T08:45:00Z,452
+r_sample_010,TestUser10,4,"Good but minor bugs","Good application overall with useful features. There are some minor bugs here and there but nothing that breaks the main functionality. Recommended.",2026-08-01T12:30:00Z,451

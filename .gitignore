@@ -1,0 +1,39 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+
+# Backend logs
+backend/*.log
+
+# Backend database (but keep sample data)
+backend/data/db/
+!backend/data/db/.gitkeep
+
+# Node / Frontend
+node_modules/
+frontend/dist/
+frontend/.vite/
+frontend/.npm-cache/
+frontend/npm-cache/
+frontend/nodejs/
+
+# Environment files
+.env
+backend/.env
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~

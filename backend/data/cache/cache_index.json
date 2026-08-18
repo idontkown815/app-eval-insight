@@ -1,0 +1,38 @@
+[
+  {
+    "cache_id": "284882215_20260816T100000",
+    "bundle_id": "284882215",
+    "collected_at": "2026-08-16T10:00:00",
+    "review_count": 50,
+    "validity_days": 7,
+    "status": "active",
+    "filepath": "./data/cache/reviews/284882215_sample.json"
+  },
+  {
+    "cache_id": "389801252_20260816T100500",
+    "bundle_id": "389801252",
+    "collected_at": "2026-08-16T10:05:00",
+    "review_count": 45,
+    "validity_days": 7,
+    "status": "active",
+    "filepath": "./data/cache/reviews/389801252_sample.json"
+  },
+  {
+    "cache_id": "839285684_20260818T212154",
+    "bundle_id": "839285684",
+    "collected_at": "2026-08-18T21:21:54.937182",
+    "review_count": 200,
+    "validity_days": 7,
+    "status": "active",
+    "filepath": "./data/cache\\reviews\\839285684_20260818T212154.json"
+  },
+  {
+    "cache_id": "839285684_20260818T212754",
+    "bundle_id": "839285684",
+    "collected_at": "2026-08-18T21:27:54.669610",
+    "review_count": 500,
+    "validity_days": 7,
+    "status": "active",
+    "filepath": "./data/cache\\reviews\\839285684_20260818T212754.json"
+  }
+]

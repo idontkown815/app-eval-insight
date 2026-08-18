@@ -1,0 +1,449 @@
+[
+  {
+    "review_id": "r_284882215_001",
+    "author": "User001",
+    "rating": 1,
+    "title": "App keeps crashing",
+    "content": "Every time I open the app it crashes within 5 seconds. I've tried reinstalling multiple times but nothing works. This bug is making the app completely broken and unusable. Please fix the crash issue immediately!",
+    "review_date": "2026-08-15T09:30:00Z",
+    "version": "453"
+  },
+  {
+    "review_id": "r_284882215_002",
+    "author": "User002",
+    "rating": 5,
+    "title": "Love connecting with friends",
+    "content": "I absolutely love this app! It's amazing how easy it is to stay connected with friends and family all over the world. The interface is perfect and easy to use. Great job team!",
+    "review_date": "2026-08-14T14:20:00Z",
+    "version": "453"
+  },
+  {
+    "review_id": "r_284882215_003",
+    "rating": 3,
+    "title": "It's ok but could be better",
+    "content": "The app is ok, not bad overall. It does what it's supposed to do but feels a bit normal compared to before. The new layout is average, nothing special. Performance is acceptable.",
+    "review_date": "2026-08-13T11:15:00Z",
+    "version": "452"
+  },
+  {
+    "review_id": "r_284882215_004",
+    "rating": 2,
+    "title": "Login problems again",
+    "content": "Having serious login issues since the last update. Keeps saying wrong password even though I know it's correct. I had to reset my password three times already. The login screen freezes sometimes too.",
+    "review_date": "2026-08-12T16:45:00Z",
+    "version": "452"
+  },
+  {
+    "review_id": "r_284882215_005",
+    "rating": 4,
+    "title": "Great app overall",
+    "content": "Great application for sharing moments with friends. I especially love the new photo editing features. Very easy to use and intuitive design. Only minor issues here and there.",
+    "review_date": "2026-08-11T08:00:00Z",
+    "version": "452"
+  },
+  {
+    "review_id": "r_284882215_006",
+    "author": "User006",
+    "rating": 1,
+    "title": "Too many ads",
+    "content": "Ads ads and more ads! I see an ad every 30 seconds when scrolling. It's so frustrating and makes the app slow. I can't even read posts properly anymore because ads keep popping up. This is getting ridiculous!",
+    "review_date": "2026-08-10T19:30:00Z",
+    "version": "451"
+  },
+  {
+    "review_id": "r_284882215_007",
+    "author": "User007",
+    "rating": 5,
+    "title": "Perfect for staying in touch",
+    "content": "Perfect social media app! I love how easy it is to share updates with my loved ones. The groups feature is amazing for organizing events. Connect friends from anywhere with just a few taps.",
+    "review_date": "2026-08-09T13:10:00Z",
+    "version": "451"
+  },
+  {
+    "review_id": "r_284882215_008",
+    "author": "User008",
+    "rating": 2,
+    "title": "Battery drain problem",
+    "content": "Huge battery drain issue with this version. My phone dies within 3 hours even when I'm just browsing. I checked and Facebook is using 70% of my battery in the background. Please fix the battery drain!",
+    "review_date": "2026-08-08T20:00:00Z",
+    "version": "451"
+  },
+  {
+    "review_id": "r_284882215_009",
+    "author": "User009",
+    "rating": 3,
+    "title": "Average experience",
+    "content": "It's a normal social app, average in most aspects. Some features are good, some need improvement. The video quality is not bad but could be better. Overall experience is just so-so.",
+    "review_date": "2026-08-07T10:30:00Z",
+    "version": "450"
+  },
+  {
+    "review_id": "r_284882215_010",
+    "author": "User010",
+    "rating": 1,
+    "title": "Forced update is annoying",
+    "content": "The forced update message keeps appearing every time I open the app! I don't want to update because the new versions are always slow and broken. Stop forcing updates on users, give us a choice!",
+    "review_date": "2026-08-06T15:45:00Z",
+    "version": "450"
+  },
+  {
+    "review_id": "r_284882215_011",
+    "author": "User011",
+    "rating": 4,
+    "title": "Love the marketplace",
+    "content": "I really love the marketplace feature! It's great for finding local deals. Easy to use interface makes selling and buying items simple. Great addition to the platform.",
+    "review_date": "2026-08-05T09:00:00Z",
+    "version": "453"
+  },
+  {
+    "review_id": "r_284882215_012",
+    "author": "User012",
+    "rating": 2,
+    "title": "Videos freeze constantly",
+    "content": "Videos freeze all the time when I try to watch them. I have to close and reopen the app every time. Sometimes the whole app freezes and I can't do anything. The slow loading is unbearable.",
+    "review_date": "2026-08-04T17:20:00Z",
+    "version": "453"
+  },
+  {
+    "review_id": "r_284882215_013",
+    "author": "User013",
+    "rating": 5,
+    "title": "Amazing community features",
+    "content": "Amazing app with wonderful community features! The groups help me connect with people who share my interests. It's easy to use and the layout looks perfect. Love this app more every day!",
+    "review_date": "2026-08-03T12:00:00Z",
+    "version": "452"
+  },
+  {
+    "review_id": "r_284882215_014",
+    "author": "User014",
+    "rating": 1,
+    "title": "Bug with notifications",
+    "content": "Notifications bug is driving me crazy! I get the same notification 10 times and then it won't go away even after I check it. The badge count never resets. This bug has been here for months.",
+    "review_date": "2026-08-02T14:30:00Z",
+    "version": "452"
+  },
+  {
+    "review_id": "r_284882215_015",
+    "author": "User015",
+    "rating": 3,
+    "title": "Not bad, needs improvements",
+    "content": "The app is not bad honestly. It works for basic social networking. Some features are quite good but the performance is just normal. I wish it was faster at loading images sometimes.",
+    "review_date": "2026-08-01T11:00:00Z",
+    "version": "451"
+  },
+  {
+    "review_id": "r_284882215_016",
+    "author": "User016",
+    "rating": 1,
+    "title": "Crash on profile page",
+    "content": "Serious crash issue: every time I click on someone's profile the app crashes immediately. Tried clearing cache, restarting phone, nothing fixes it. The app is broken for profile browsing.",
+    "review_date": "2026-07-31T18:15:00Z",
+    "version": "451"
+  },
+  {
+    "review_id": "r_284882215_017",
+    "author": "User017",
+    "rating": 5,
+    "title": "Easy to use social app",
+    "content": "This is the most easy to use social media app I've tried. Everything is where you expect it to be. Great for sharing photos and connecting with old friends. Highly recommend it!",
+    "review_date": "2026-07-30T08:45:00Z",
+    "version": "450"
+  },
+  {
+    "review_id": "r_284882215_018",
+    "author": "User018",
+    "rating": 2,
+    "title": "Slow app performance",
+    "content": "The app is so slow now! It takes 10 seconds just to open my feed. Scrolling is laggy and everything feels broken. I have a new phone so it's definitely not my device. Please optimize performance.",
+    "review_date": "2026-07-29T16:30:00Z",
+    "version": "450"
+  },
+  {
+    "review_id": "r_284882215_019",
+    "author": "User019",
+    "rating": 4,
+    "title": "Great memories feature",
+    "content": "The memories feature is great! I love seeing posts from previous years. It's amazing how this app helps me preserve special moments. Very easy to use and share memories with family.",
+    "review_date": "2026-07-28T13:20:00Z",
+    "version": "453"
+  },
+  {
+    "review_id": "r_284882215_020",
+    "author": "User020",
+    "rating": 3,
+    "title": "Just ok social platform",
+    "content": "It's an ok platform for social networking. Nothing extraordinary but gets the job done. Interface is normal and average. I use it daily but wouldn't say I'm a huge fan.",
+    "review_date": "2026-07-27T19:00:00Z",
+    "version": "453"
+  },
+  {
+    "review_id": "r_284882215_021",
+    "author": "User021",
+    "rating": 1,
+    "title": "Can't login at all",
+    "content": "Major login problem - I cannot login to my account at all! Two factor authentication is broken, the code never arrives. Contacted support 5 times with no response. This is completely unacceptable!",
+    "review_date": "2026-07-26T07:30:00Z",
+    "version": "452"
+  },
+  {
+    "review_id": "r_284882215_022",
+    "author": "User022",
+    "rating": 5,
+    "title": "Love the events feature",
+    "content": "I absolutely love the events planning feature! It makes organizing parties so easy and perfect. Connecting with friends to RSVP is amazing and intuitive. Great work developers!",
+    "review_date": "2026-07-25T15:10:00Z",
+    "version": "452"
+  },
+  {
+    "review_id": "r_284882215_023",
+    "author": "User023",
+    "rating": 2,
+    "title": "Ads interrupt every post",
+    "content": "Ads are everywhere now! I can't read 2 posts without an ad interrupting. The ads are also getting longer and louder. Too many sponsored posts make the experience broken and slow.",
+    "review_date": "2026-07-24T10:45:00Z",
+    "version": "451"
+  },
+  {
+    "review_id": "r_284882215_024",
+    "author": "User024",
+    "rating": 4,
+    "title": "Pretty good overall",
+    "content": "Pretty good social media application. The features are great and it's easy to navigate. I enjoy connecting with friends and family through it. Only minor complaints about some small bugs.",
+    "review_date": "2026-07-23T14:00:00Z",
+    "version": "451"
+  },
+  {
+    "review_id": "r_284882215_025",
+    "author": "User025",
+    "rating": 3,
+    "title": "Average user experience",
+    "content": "Average experience overall. The app is not bad but also not amazing. Some days it works fine, other days it feels slow and buggy. Normal performance for a big social app I guess.",
+    "review_date": "2026-07-22T09:30:00Z",
+    "version": "450"
+  },
+  {
+    "review_id": "r_284882215_026",
+    "author": "User026",
+    "rating": 2,
+    "title": "Battery drains overnight",
+    "content": "My battery drains from 100% to 20% overnight just from this app running in the background. I disabled all background refresh but still same battery drain problem. This is really broken behavior.",
+    "review_date": "2026-07-21T21:00:00Z",
+    "version": "450"
+  },
+  {
+    "review_id": "r_284882215_027",
+    "author": "User027",
+    "rating": 5,
+    "title": "Perfect for my business",
+    "content": "Perfect platform for growing my small business! The pages feature is amazing and easy to use. I love connecting with customers and sharing updates. Great for marketing and reaching new people.",
+    "review_date": "2026-07-20T11:45:00Z",
+    "version": "453"
+  },
+  {
+    "review_id": "r_284882215_028",
+    "author": "User028",
+    "rating": 1,
+    "title": "Freeze on startup",
+    "content": "The app freeze on startup every single time now. I see the logo then it freezes completely. I have to force close and try again 3-4 times. This is making the app broken and impossible to use quickly.",
+    "review_date": "2026-07-19T16:20:00Z",
+    "version": "453"
+  },
+  {
+    "review_id": "r_284882215_029",
+    "author": "User029",
+    "rating": 4,
+    "title": "Great sharing experience",
+    "content": "Great experience sharing content with my network! The photo albums are well organized and it's easy to tag friends. Love the new reactions feature too. Keep up the great work!",
+    "review_date": "2026-07-18T13:30:00Z",
+    "version": "452"
+  },
+  {
+    "review_id": "r_284882215_030",
+    "author": "User030",
+    "rating": 3,
+    "title": "It's normal, nothing special",
+    "content": "The app is normal honestly. It works when it needs to. I have nothing great to say but also nothing terrible. Average design, average features, just your typical social media platform.",
+    "review_date": "2026-07-17T08:15:00Z",
+    "version": "452"
+  },
+  {
+    "review_id": "r_284882215_031",
+    "author": "User031",
+    "rating": 1,
+    "title": "Crash when posting photos",
+    "content": "The app crashes every single time I try to post photos! I select the photos, add a caption, hit post and boom it crashes. Lost several posts because of this bug. The app is completely broken for posting!",
+    "review_date": "2026-07-16T19:45:00Z",
+    "version": "451"
+  },
+  {
+    "review_id": "r_284882215_032",
+    "author": "User032",
+    "rating": 5,
+    "title": "Amazing way to stay connected",
+    "content": "This app is amazing for staying connected with my large family across different countries! Video calls are crystal clear, messaging is perfect. It's easy to use even for my elderly parents. Love it!",
+    "review_date": "2026-07-15T10:00:00Z",
+    "version": "451"
+  },
+  {
+    "review_id": "r_284882215_033",
+    "author": "User033",
+    "rating": 2,
+    "title": "Login loop bug",
+    "content": "Stuck in a login loop! I enter my credentials correctly, it loads then kicks me back to login screen again. This bug has been reported for weeks. Tried everything, only using mobile site works now.",
+    "review_date": "2026-07-14T17:30:00Z",
+    "version": "450"
+  },
+  {
+    "review_id": "r_284882215_034",
+    "author": "User034",
+    "rating": 4,
+    "title": "Good app with minor issues",
+    "content": "Good social networking app overall. The interface is great and most features work perfectly. Minor issues with notifications sometimes. The groups and pages features are excellent for community building.",
+    "review_date": "2026-07-13T14:15:00Z",
+    "version": "450"
+  },
+  {
+    "review_id": "r_284882215_035",
+    "author": "User035",
+    "rating": 3,
+    "title": "Decent enough app",
+    "content": "Decent enough social platform. Not bad for what it does. The layout is a bit cluttered but functional. Performance is average these days, could definitely be faster. I keep using it out of habit.",
+    "review_date": "2026-07-12T12:00:00Z",
+    "version": "453"
+  },
+  {
+    "review_id": "r_284882215_036",
+    "author": "User036",
+    "rating": 1,
+    "title": "Forced update ruined everything",
+    "content": "That forced update last week completely ruined the app for me! Before the forced update everything was fine, now it's slow, full of ads, and crashes constantly. Why would you force a broken update on all users?",
+    "review_date": "2026-07-11T15:45:00Z",
+    "version": "453"
+  },
+  {
+    "review_id": "r_284882215_037",
+    "author": "User037",
+    "rating": 5,
+    "title": "Love everything about it",
+    "content": "I love everything about this application! From messaging to sharing photos to watching videos - everything is perfect and easy to use. Great job continuously improving the experience for all users.",
+    "review_date": "2026-07-10T09:20:00Z",
+    "version": "452"
+  },
+  {
+    "review_id": "r_284882215_038",
+    "author": "User038",
+    "rating": 2,
+    "title": "Slow loading feed",
+    "content": "The loading of my news feed is extremely slow! It spins for 15 seconds before showing anything. Images are slow to load and videos keep buffering. This used to be fast, what happened?",
+    "review_date": "2026-07-09T18:00:00Z",
+    "version": "452"
+  },
+  {
+    "review_id": "r_284882215_039",
+    "author": "User039",
+    "rating": 4,
+    "title": "Enjoy using it daily",
+    "content": "I enjoy using this app daily to catch up with what my friends are doing. The stories feature is great and easy to use. Connecting with people has never been simpler. Recommended!",
+    "review_date": "2026-07-08T11:30:00Z",
+    "version": "451"
+  },
+  {
+    "review_id": "r_284882215_040",
+    "author": "User040",
+    "rating": 3,
+    "title": "Just about average",
+    "content": "The app is just about average at this point. It's ok for scrolling but I wish there were fewer ads. Not bad but not as great as it used to be. Normal, run-of-the-mill social media.",
+    "review_date": "2026-07-07T16:45:00Z",
+    "version": "451"
+  },
+  {
+    "review_id": "r_284882215_041",
+    "author": "User041",
+    "rating": 1,
+    "title": "Bug in messenger integration",
+    "content": "The messenger integration is completely broken! When I click on messages the app crashes right away. Can't send or receive any messages because of this bug. Tried reinstalling 5 times with no fix.",
+    "review_date": "2026-07-06T20:15:00Z",
+    "version": "450"
+  },
+  {
+    "review_id": "r_284882215_042",
+    "author": "User042",
+    "rating": 5,
+    "title": "Wonderful community feel",
+    "content": "There's a wonderful community feel to this platform! It's amazing how well it connects people with similar interests. Easy to use interface makes navigating groups and pages a breeze. Great app!",
+    "review_date": "2026-07-05T10:30:00Z",
+    "version": "450"
+  },
+  {
+    "review_id": "r_284882215_043",
+    "author": "User043",
+    "rating": 2,
+    "title": "Ads are out of control",
+    "content": "The ads are completely out of control now! I see ads between stories, ads in comments, ads in groups. Everywhere I look there's an ad. The content feed is 80% ads, 20% actual posts. Too much!",
+    "review_date": "2026-07-04T13:10:00Z",
+    "version": "453"
+  },
+  {
+    "review_id": "r_284882215_044",
+    "author": "User044",
+    "rating": 4,
+    "title": "Great for photos",
+    "content": "Great platform for sharing photo albums with family and friends! The quality preservation is perfect. I love the album organization features. Very easy to use and reliable for storing memories.",
+    "review_date": "2026-07-03T14:45:00Z",
+    "version": "453"
+  },
+  {
+    "review_id": "r_284882215_045",
+    "author": "User045",
+    "rating": 3,
+    "title": "OK social networking option",
+    "content": "It's an OK social networking option. Not the best, not the worst. The features are normal and average compared to competitors. I use it mainly because my friends are here. It works.",
+    "review_date": "2026-07-02T09:00:00Z",
+    "version": "452"
+  },
+  {
+    "review_id": "r_284882215_046",
+    "author": "User046",
+    "rating": 1,
+    "title": "Battery drain is extreme",
+    "content": "The battery drain is absolutely extreme on this version! I lose 1% battery every minute the app is open. Phone gets burning hot too. This broken battery issue needs to be the top priority fix.",
+    "review_date": "2026-07-01T17:30:00Z",
+    "version": "452"
+  },
+  {
+    "review_id": "r_284882215_047",
+    "author": "User047",
+    "rating": 5,
+    "title": "Easy to learn and use",
+    "content": "Even my 80-year-old grandma finds this app easy to use! That says a lot about the design. She loves connecting with her grandkids through photos and videos. Great job making it accessible for everyone.",
+    "review_date": "2026-06-30T11:15:00Z",
+    "version": "451"
+  },
+  {
+    "review_id": "r_284882215_048",
+    "author": "User048",
+    "rating": 2,
+    "title": "UI freeze during scroll",
+    "content": "Constant UI freeze while scrolling through my feed! The app becomes completely unresponsive for 10-15 seconds then suddenly catches up. It's really frustrating and broken feeling. Needs urgent optimization.",
+    "review_date": "2026-06-29T19:45:00Z",
+    "version": "451"
+  },
+  {
+    "review_id": "r_284882215_049",
+    "author": "User049",
+    "rating": 4,
+    "title": "Solid social media choice",
+    "content": "A solid choice for social media overall. Great feature set, good privacy options, and excellent ways to connect friends and family. The occasional small bug but nothing that ruins the experience.",
+    "review_date": "2026-06-28T12:30:00Z",
+    "version": "450"
+  },
+  {
+    "review_id": "r_284882215_050",
+    "author": "User050",
+    "rating": 3,
+    "title": "Pretty normal experience",
+    "content": "My experience has been pretty normal honestly. Not great, not terrible. The app does what it's supposed to do without too many issues. Average layout, average speed, just a standard social app.",
+    "review_date": "2026-06-27T15:20:00Z",
+    "version": "450"
+  }
+]
