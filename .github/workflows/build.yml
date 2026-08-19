@@ -20,11 +20,8 @@ jobs:
           - os: windows-latest
             artifact_name: App-Review-Insight-windows-x64
             platform: win
-          - os: macos-13
+          - os: macos-latest
             artifact_name: App-Review-Insight-macos-x64
-            platform: mac
-          - os: macos-14
-            artifact_name: App-Review-Insight-macos-arm64
             platform: mac
     runs-on: ${{ matrix.os }}
 
