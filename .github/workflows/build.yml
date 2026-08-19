@@ -49,12 +49,16 @@ jobs:
       - name: Build frontend
         working-directory: frontend
         run: |
+          node -e "require('fs').rmSync('package-lock.json', {force: true})"
           npm install
           npm run build
 
       - name: Install desktop dependencies
         working-directory: desktop
-        run: npm install
+        run: |
+          # Remove potentially corrupted lockfile and regenerate
+          node -e "require('fs').rmSync('package-lock.json', {force: true})"
+          npm install
 
       - name: Verify build resources
         working-directory: desktop
