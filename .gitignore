@@ -15,6 +15,10 @@ backend/*.log
 backend/data/db/
 !backend/data/db/.gitkeep
 
+# Runtime cache files (generated during analysis)
+backend/data/cache/reviews/*.json
+!backend/data/cache/reviews/*_sample.json
+
 # Node / Frontend
 node_modules/
 frontend/dist/

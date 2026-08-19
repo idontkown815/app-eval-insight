@@ -1,0 +1,70 @@
+{
+  "name": "app-review-insight-desktop",
+  "version": "0.1.0",
+  "description": "Desktop wrapper for App Review Insight (Electron + PyInstaller)",
+  "main": "main.js",
+  "author": "App Review Insight",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --dev",
+    "build:frontend": "cd ../frontend && npm install && npm run build",
+    "build:backend": "pyinstaller --noconfirm --distpath ../backend/dist --workpath ../backend/build --specpath . backend.spec",
+    "build:electron": "electron-builder",
+    "build:all": "npm run build:frontend && npm run build:backend && npm run build:electron"
+  },
+  "build": {
+    "appId": "com.appreviewinsight.desktop",
+    "productName": "App Review Insight",
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "../frontend/dist",
+        "to": "frontend",
+        "filter": ["**/*"]
+      },
+      {
+        "from": "../backend/dist",
+        "to": "backend",
+        "filter": ["**/*"]
+      },
+      {
+        "from": "../backend/.env.example",
+        "to": "config.env.example"
+      }
+    ],
+    "win": {
+      "target": ["nsis"]
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "App Review Insight"
+    },
+    "mac": {
+      "target": ["dmg"],
+      "category": "public.app-category.developer-tools"
+    },
+    "dmg": {
+      "contents": [
+        { "x": 130, "y": 220 },
+        { "x": 410, "y": 220, "type": "link", "path": "/Applications" }
+      ]
+    }
+  },
+  "devDependencies": {
+    "electron": "^31.0.0",
+    "electron-builder": "^24.13.3"
+  }
+}

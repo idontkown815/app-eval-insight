@@ -52,26 +52,59 @@ class PipelineOrchestrator:
                 raw_reviews = self.crawler.fetch_reviews(bundle_id)
                 if raw_reviews:
                     self.cache_manager.save_reviews(bundle_id, raw_reviews)
-            except Exception:
+            except Exception as fetch_err:
+                # 实时抓取失败，尝试缓存
                 cached = self.cache_manager.get_cached_reviews(bundle_id)
                 if cached:
                     raw_reviews = cached.get("reviews", [])
                     data_source = "cache"
                 else:
-                    raise RuntimeError("无法获取评价数据：实时抓取失败且无缓存")
+                    # 提供清晰的错误信息，区分不同原因
+                    error_msg = str(fetch_err)
+                    if "RSS Feed 和 Web 爬取均未返回数据" in error_msg:
+                        raise RuntimeError(
+                            f"无法获取该应用的评价数据 (id={bundle_id})。"
+                            f"原因：Apple 官方 RSS Feed API 对该应用不可用，"
+                            f"且网页爬取也未找到评价。"
+                            f"这可能是因为：\n"
+                            f"1. 该应用在 App Store 上没有公开评价\n"
+                            f"2. Apple 对该应用的评价接口做了限制\n"
+                            f"3. 网络连接问题（请检查网络后重试）\n\n"
+                            f"建议：尝试使用 CSV/JSON 文件导入功能，"
+                            f"或选择其他有评价的应用。"
+                        )
+                    elif "连接被 Apple 拒绝" in error_msg or "ConnectionResetError" in error_msg:
+                        raise RuntimeError(
+                            f"请求被 App Store 拒绝 (id={bundle_id})。"
+                            f"这可能是因为请求过于频繁被限流。"
+                            f"请等待几分钟后重试，或使用文件导入功能。"
+                        )
+                    else:
+                        raise RuntimeError(
+                            f"获取评价数据失败 (id={bundle_id})：{error_msg}"
+                        )
             if not raw_reviews:
                 cached = self.cache_manager.get_cached_reviews(bundle_id)
                 if cached:
                     raw_reviews = cached.get("reviews", [])
                     data_source = "cache"
                 else:
-                    raise RuntimeError("未获取到任何评价数据")
+                    raise RuntimeError(
+                        f"未获取到任何评价数据 (id={bundle_id})。"
+                        f"App Store 可能未公开该应用的评价。"
+                        f"请尝试其他应用，或使用文件导入功能。"
+                    )
             results["raw_reviews"] = raw_reviews
             results["data_source"] = data_source
+            results["data_fetch_note"] = (
+                "数据来源：App Store RSS Feed" if data_source == "live" and raw_reviews
+                else "数据来源：App Store 网页爬取" if data_source == "live"
+                else f"数据来源：本地缓存（{len(raw_reviews)} 条评价）"
+            )
             self.tracker.update(task_id, "data_collection", "completed")
         except Exception as e:
             self.tracker.update(task_id, "data_collection", "failed")
-            results["error"] = f"阶段2-data_collection失败: {str(e)}"
+            results["error"] = f"阶段2-数据收集失败: {str(e)}"
             results["task_id"] = task_id
             results["status"] = "failed"
             return results

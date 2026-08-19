@@ -34,5 +34,50 @@
     "validity_days": 7,
     "status": "active",
     "filepath": "./data/cache\\reviews\\839285684_20260818T212754.json"
+  },
+  {
+    "cache_id": "839285684_20260819T150122",
+    "bundle_id": "839285684",
+    "collected_at": "2026-08-19T15:01:22.758252",
+    "review_count": 50,
+    "validity_days": 7,
+    "status": "active",
+    "filepath": "./data/cache\\reviews\\839285684_20260819T150122.json"
+  },
+  {
+    "cache_id": "835599320_20260819T152120",
+    "bundle_id": "835599320",
+    "collected_at": "2026-08-19T15:21:20.287592",
+    "review_count": 8,
+    "validity_days": 7,
+    "status": "active",
+    "filepath": "./data/cache\\reviews\\835599320_20260819T152120.json"
+  },
+  {
+    "cache_id": "835599320_20260819T152317",
+    "bundle_id": "835599320",
+    "collected_at": "2026-08-19T15:23:17.162895",
+    "review_count": 8,
+    "validity_days": 7,
+    "status": "active",
+    "filepath": "./data/cache\\reviews\\835599320_20260819T152317.json"
+  },
+  {
+    "cache_id": "544007664_20260819T152700",
+    "bundle_id": "544007664",
+    "collected_at": "2026-08-19T15:27:00.851548",
+    "review_count": 8,
+    "validity_days": 7,
+    "status": "active",
+    "filepath": "./data/cache\\reviews\\544007664_20260819T152700.json"
+  },
+  {
+    "cache_id": "835599320_20260819T152730",
+    "bundle_id": "835599320",
+    "collected_at": "2026-08-19T15:27:30.271438",
+    "review_count": 8,
+    "validity_days": 7,
+    "status": "active",
+    "filepath": "./data/cache\\reviews\\835599320_20260819T152730.json"
   }
 ]
