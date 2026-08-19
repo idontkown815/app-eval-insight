@@ -16,6 +16,8 @@
   "build": {
     "appId": "com.appreviewinsight.desktop",
     "productName": "App Review Insight",
+    "asar": true,
+    "icon": "build/icon.png",
     "directories": {
       "output": "dist",
       "buildResources": "build"
@@ -23,7 +25,8 @@
     "files": [
       "main.js",
       "preload.js",
-      "package.json"
+      "package.json",
+      "build/**/*"
     ],
     "extraResources": [
       {
@@ -43,6 +46,7 @@
     ],
     "win": {
       "target": ["nsis"],
+      "icon": "build/icon.png",
       "signingHashAlgorithms": []
     },
     "nsis": {
@@ -55,11 +59,13 @@
     },
     "mac": {
       "target": ["dmg"],
+      "icon": "build/icon.png",
       "category": "public.app-category.developer-tools",
       "hardenedRuntime": false,
       "gatekeeperAssess": false
     },
     "dmg": {
+      "icon": "build/icon.png",
       "contents": [
         { "x": 130, "y": 220 },
         { "x": 410, "y": 220, "type": "link", "path": "/Applications" }
