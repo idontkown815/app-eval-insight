@@ -58,19 +58,9 @@ jobs:
 
       - name: Verify build resources
         working-directory: desktop
-        shell: bash
         run: |
           echo "Checking build resources..."
-          mkdir -p build
-          if [ ! -f "build/icon.png" ]; then
-            echo "WARNING: icon.png not found in build/"
-            echo "Creating a minimal placeholder icon..."
-            # Create 1x1 blue PNG via base64 decode (cross-platform)
-            echo "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGA7WBi2gAAAABJRU5ErkJggg==" | base64 -d > build/icon.png
-            echo "Created placeholder icon.png ($(wc -c < build/icon.png) bytes)"
-          else
-            echo "icon.png found ($(wc -c < build/icon.png) bytes)"
-          fi
+          node create-icon.js
           echo "Build resources check complete"
 
       - name: Build backend (PyInstaller)
