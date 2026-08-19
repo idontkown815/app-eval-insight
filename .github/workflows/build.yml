@@ -61,11 +61,32 @@ jobs:
         shell: bash
         run: |
           echo "Checking build resources..."
+          mkdir -p build
           if [ ! -f "build/icon.png" ]; then
             echo "WARNING: icon.png not found in build/"
             echo "Creating a minimal placeholder icon..."
-            printf '\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x00\x01\x00\x00\x00\x01\x08\x06\x00\x00\x00\x1f\x15\xc4\x89\x00\x00\x00\rIDATx\x9cc\xf8\x0f\x00\x00\x01\x01\x00\x05\x18\xd8N\x00\x00\x00\x00IEND\xaeB`\x82' > build/icon.png
-            echo "Created placeholder icon.png"
+            # Use python command (works on both Windows and macOS)
+            PYTHON_CMD="python"
+            if command -v python3 &> /dev/null; then
+              PYTHON_CMD="python3"
+            fi
+            $PYTHON_CMD -c "
+import struct, zlib
+def create_png(filename):
+    width, height = 1, 1
+    def chunk(chunk_type, data):
+        c = chunk_type + data
+        return struct.pack('>I', len(data)) + c + struct.pack('>I', zlib.crc32(c) & 0xffffffff)
+    png = b'\x89PNG\r\n\x1a\n'
+    png += chunk(b'IHDR', struct.pack('>IIBBBBB', width, height, 8, 6, 0, 0, 0))
+    raw = b'\x00\x00\x80\xff'
+    png += chunk(b'IDAT', zlib.compress(raw))
+    png += chunk(b'IEND', b'')
+    with open(filename, 'wb') as f:
+        f.write(png)
+    print(f'Created {filename} ({len(png)} bytes)')
+create_png('build/icon.png')
+"
           else
             echo "icon.png found ($(wc -c < build/icon.png) bytes)"
           fi
