@@ -20,7 +20,16 @@ datas = [
 ]
 
 # 显式声明 app 包及其所有子模块，避免动态导入遗漏
-hiddenimports = ['app', 'dotenv', 'uvicorn.logging', 'uvicorn.lifespan.on', 'uvicorn.protocols.websockets.auto']
+hiddenimports = [
+    'app',
+    'dotenv',
+    'dateutil',
+    'dateutil.parser',
+    'markdown',
+    'uvicorn.logging',
+    'uvicorn.lifespan.on',
+    'uvicorn.protocols.websockets.auto',
+]
 hiddenimports += collect_submodules('app')
 
 a = Analysis(
