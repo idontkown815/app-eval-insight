@@ -35,7 +35,7 @@ class PRDGenerator:
     def generate(self, findings: list, user_goal: str) -> dict:
         findings_summary = json.dumps([
             {
-                "id": idx if not f.get("id") else f.get("id"),
+                "id": f.get("id", idx if not f.get("id") else f.get("id")),
                 "title": f.get("title", ""),
                 "description": f.get("description", ""),
                 "strength": f.get("evidence_strength", "medium"),
@@ -43,6 +43,13 @@ class PRDGenerator:
             }
             for idx, f in enumerate(findings)
         ], ensure_ascii=False)
+
+        # 构建 finding_id → finding 映射用于后处理
+        finding_map = {}
+        for f in findings:
+            fid = str(f.get("id", ""))
+            if fid:
+                finding_map[fid] = f
 
         if self.llm_client.is_available():
             try:
@@ -54,16 +61,22 @@ class PRDGenerator:
                     ),
                 )
                 reqs = result.get("requirements", [])
-                # 确保每条需求有 source_review_ids（LLM 可能遗漏）
                 for req in reqs:
                     req["generated_by"] = "llm"
                     if not req.get("source_review_ids"):
-                        fid = req.get("finding_id")
-                        for f in findings:
-                            f_id = f.get("id")
-                            if f_id is not None and str(fid) == str(f_id):
-                                req["source_review_ids"] = f.get("supporting_review_ids", [])
-                                break
+                        fid = str(req.get("finding_id", ""))
+                        # 尝试精确匹配或模糊匹配
+                        matched_f = finding_map.get(fid)
+                        if not matched_f:
+                            # 尝试数字匹配
+                            for key, val in finding_map.items():
+                                if fid in key or key in fid:
+                                    matched_f = val
+                                    break
+                        if matched_f:
+                            req["source_review_ids"] = matched_f.get("supporting_review_ids", [])
+                        else:
+                            req["source_review_ids"] = []
                 return {
                     "requirements": reqs,
                     "version_plan": result.get("version_plan", {}),

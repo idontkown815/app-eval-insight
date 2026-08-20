@@ -158,6 +158,7 @@ async def get_task_results(task_id: str):
         "is_using_cache": result.get("data_source") == "cache",
         "is_fallback": result.get("is_fallback", False),
         "llm_available": pipeline.llm_client.is_available(),
+        "cleaned_reviews": result.get("cleaned_reviews", []),
         "deliverables": deliverables,
         "error": result.get("error"),
     }

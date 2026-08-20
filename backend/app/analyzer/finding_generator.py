@@ -10,13 +10,14 @@ class FindingGenerator:
 
 用户分析目标：{user_goal}
 
-分类结果摘要：
+分类结果（每个分类包含真实的review_ids，请务必使用这些真实ID，不要编造）：
 {cat_summary}
 
 要求：
-1. 每条发现包含：title(标题)、description(详细描述)、evidence_strength(strong/medium/weak)、supporting_review_ids(支撑review_id数组)、representative_quotes(代表性引用数组)、suggested_action(建议行动)、is_positive(布尔值，是否为正面发现)
-2. 优先选择最有价值、数据支撑最充分的发现
-3. 正面和负面发现都应涵盖
+1. 每条发现包含：title(标题)、description(详细描述)、evidence_strength(strong/medium/weak)、supporting_review_ids(支撑review_id数组 - 必须从上面的分类中选取真实的review_id)、representative_quotes(代表性引用数组 - 必须引用真实评价内容)、suggested_action(建议行动)、is_positive(布尔值，是否为正面发现)
+2. supporting_review_ids 必须使用上方分类中列出的真实ID，不要创建或编造不存在的ID
+3. 优先选择最有价值、数据支撑最充分的发现
+4. 正面和负面发现都应涵盖
 
 只输出JSON格式：{{"findings": [{{...}}]}}
 
@@ -26,17 +27,31 @@ class FindingGenerator:
         self.llm_client = llm_client
 
     def generate(self, categories: list, reviews: list, user_goal: str) -> list:
+        review_map = {r.get("review_id"): r for r in reviews}
+
         if not self.llm_client.is_available():
             return self._fallback_findings(categories, reviews)
 
         cat_summary_list = []
         for cat in categories:
+            cat_review_ids = cat.get("review_ids", [])
+            # Include actual review IDs and real content snippets
+            real_quotes = []
+            for rid in cat_review_ids[:3]:
+                r = review_map.get(rid)
+                if r:
+                    content = r.get("content", "")
+                    if content:
+                        real_quotes.append(f"  [ID:{rid}] {content[:150]}")
+
             cat_summary_list.append({
                 "name": cat.get("name", ""),
-                "count": len(cat.get("review_ids", [])),
+                "count": len(cat_review_ids),
+                "review_ids": cat_review_ids[:8],
                 "sentiment": cat.get("sentiment", "neutral"),
                 "description": cat.get("description", ""),
                 "key_points": cat.get("key_points", []),
+                "sample_reviews": real_quotes,
             })
         cat_summary = json.dumps(cat_summary_list, ensure_ascii=False, indent=2)
 

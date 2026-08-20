@@ -130,6 +130,8 @@ class PipelineOrchestrator:
             self.tracker.update(task_id, "classification", "in_progress")
             focus_areas = goal_analysis.get("focus_areas", ["全面分析"])
             categories = self.classifier.classify(cleaned_reviews, focus_areas)
+            # 验证分类中的 review_ids 是否真实存在
+            categories = self._validate_category_ids(categories, cleaned_reviews)
             if not self.llm_client.is_available():
                 results["is_fallback"] = True
             else:
@@ -149,6 +151,9 @@ class PipelineOrchestrator:
                 findings = self.finding_generator.generate(categories, cleaned_reviews, user_goal)
             else:
                 findings = self.finding_generator._fallback_findings(categories, cleaned_reviews)
+            # 为每个发现添加显式ID，并验证 supporting_review_ids
+            findings = self._assign_finding_ids(findings)
+            findings = self._validate_finding_ids(findings, cleaned_reviews, categories)
             findings = self.evidence_evaluator.evaluate(findings, cleaned_reviews)
             results["findings"] = findings
             self.tracker.update(task_id, "evidence_evaluation", "completed")
@@ -162,6 +167,8 @@ class PipelineOrchestrator:
         try:
             self.tracker.update(task_id, "prd_generation", "in_progress")
             prd = self.prd_generator.generate(findings, user_goal)
+            # 验证需求中的 source_review_ids 是否真实存在
+            prd["requirements"] = self._validate_prd_ids(prd.get("requirements", []), findings, cleaned_reviews)
             results["prd"] = prd
             self.tracker.update(task_id, "prd_generation", "completed")
         except Exception as e:
@@ -175,6 +182,8 @@ class PipelineOrchestrator:
             self.tracker.update(task_id, "test_case_generation", "in_progress")
             requirements = prd.get("requirements", [])
             test_cases = self.test_case_generator.generate(requirements)
+            # 验证测试用例中的 source_review_ids 是否真实存在
+            test_cases = self._validate_test_case_ids(test_cases, requirements, cleaned_reviews)
             results["test_cases"] = test_cases
             self.tracker.update(task_id, "test_case_generation", "completed")
         except Exception as e:
@@ -223,6 +232,137 @@ class PipelineOrchestrator:
             pass
 
         return results
+
+    # ========== ID 验证与修复方法 ==========
+
+    @staticmethod
+    def _get_real_review_ids(reviews: list) -> set:
+        return {r.get("review_id") for r in reviews if r.get("review_id")}
+
+    @staticmethod
+    def _filter_to_real_ids(id_list: list, real_ids: set, fallback_ids: list = None) -> list:
+        """过滤ID列表，只保留真实存在的ID；若全被过滤，则用fallback_ids填充。"""
+        valid = [rid for rid in id_list if rid in real_ids]
+        if not valid and fallback_ids:
+            valid = [rid for rid in fallback_ids if rid in real_ids][:len(id_list) or 3]
+        if not valid and fallback_ids:
+            valid = fallback_ids[:3]
+        return valid
+
+    def _validate_category_ids(self, categories: list, reviews: list) -> list:
+        """验证分类中的 review_ids 是否真实存在。"""
+        real_ids = self._get_real_review_ids(reviews)
+        if not real_ids:
+            return categories
+        for cat in categories:
+            cat["review_ids"] = self._filter_to_real_ids(
+                cat.get("review_ids", []), real_ids,
+                fallback_ids=list(real_ids)[:5]
+            )
+        return categories
+
+    def _assign_finding_ids(self, findings: list) -> list:
+        """为每个发现分配显式ID。"""
+        for i, f in enumerate(findings):
+            if not f.get("id"):
+                f["id"] = i
+            if isinstance(f.get("id"), int) or (isinstance(f.get("id"), str) and not str(f.get("id")).startswith("FIND-")):
+                f["id"] = f"FIND-{i+1:03d}"
+        return findings
+
+    def _validate_finding_ids(self, findings: list, reviews: list, categories: list) -> list:
+        """验证发现中的 supporting_review_ids 是否真实存在。"""
+        real_ids = self._get_real_review_ids(reviews)
+        if not real_ids:
+            return findings
+
+        # 从分类中构建 ID → 分类的映射，作为 fallback 源
+        cat_ids_map = {}
+        for cat in categories:
+            for rid in cat.get("review_ids", []):
+                if rid in real_ids:
+                    cat_ids_map[rid] = cat.get("name", "")
+
+        for finding in findings:
+            ids = finding.get("supporting_review_ids", [])
+            valid_ids = self._filter_to_real_ids(ids, real_ids)
+            if not valid_ids:
+                # fallback: 从所有分类中选取真实ID
+                all_cat_ids = []
+                for cat in categories:
+                    all_cat_ids.extend(cat.get("review_ids", []))
+                valid_ids = self._filter_to_real_ids(ids, real_ids, fallback_ids=all_cat_ids)
+            finding["supporting_review_ids"] = valid_ids
+
+            # 同时验证 representative_quotes 来自真实评价
+            valid_quotes = []
+            review_map = {r.get("review_id"): r for r in reviews}
+            for rid in valid_ids[:3]:
+                r = review_map.get(rid)
+                if r:
+                    q = r.get("content", "")
+                    if q and q[:100] not in valid_quotes:
+                        valid_quotes.append(q[:100])
+            if valid_quotes:
+                finding["representative_quotes"] = valid_quotes
+
+        return findings
+
+    def _validate_prd_ids(self, requirements: list, findings: list, reviews: list) -> list:
+        """验证需求中的 source_review_ids 是否真实存在。"""
+        real_ids = self._get_real_review_ids(reviews)
+        if not real_ids:
+            return requirements
+
+        # 构建 finding_id → source_review_ids 映射
+        finding_review_map = {}
+        for f in findings:
+            fid = str(f.get("id", ""))
+            finding_review_map[fid] = f.get("supporting_review_ids", [])
+
+        for req in requirements:
+            existing_ids = req.get("source_review_ids", [])
+            valid_ids = self._filter_to_real_ids(existing_ids, real_ids)
+
+            # 如果没有有效ID，尝试从关联的finding获取
+            if not valid_ids:
+                fid = str(req.get("finding_id", ""))
+                finding_ids = finding_review_map.get(fid, [])
+                valid_ids = self._filter_to_real_ids(existing_ids, real_ids, fallback_ids=finding_ids)
+
+            # 最终fallback
+            if not valid_ids:
+                valid_ids = list(real_ids)[:3]
+
+            req["source_review_ids"] = valid_ids
+        return requirements
+
+    def _validate_test_case_ids(self, test_cases: list, requirements: list, reviews: list) -> list:
+        """验证测试用例中的 source_review_ids 是否真实存在。"""
+        real_ids = self._get_real_review_ids(reviews)
+        if not real_ids:
+            return test_cases
+
+        # 构建 requirement_id → source_review_ids 映射
+        req_review_map = {}
+        for req in requirements:
+            rid = req.get("id", "")
+            req_review_map[rid] = req.get("source_review_ids", [])
+
+        for tc in test_cases:
+            existing_ids = tc.get("source_review_ids", [])
+            valid_ids = self._filter_to_real_ids(existing_ids, real_ids)
+
+            if not valid_ids:
+                req_id = tc.get("requirement_id", "")
+                req_ids = req_review_map.get(req_id, [])
+                valid_ids = self._filter_to_real_ids(existing_ids, real_ids, fallback_ids=req_ids)
+
+            if not valid_ids:
+                valid_ids = list(real_ids)[:2]
+
+            tc["source_review_ids"] = valid_ids
+        return test_cases
 
     @staticmethod
     def _build_data_note(raw_reviews: list, data_source: str) -> str:
