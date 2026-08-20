@@ -19,6 +19,7 @@ class TestCaseGenerator:
 - when: 执行操作
 - then: 预期结果
 - type: 用例类型（positive/negative）
+- source_review_ids: 来源评审ID数组（从需求的source_review_ids中选取，用于验证测试是否覆盖了用户提出的真实问题）
 
 只输出JSON，不要其他文字。"""
 
@@ -34,7 +35,15 @@ class TestCaseGenerator:
                     self.SYSTEM,
                     self.USER_TEMPLATE.format(requirements_json=requirements_json),
                 )
-                return result.get("test_cases", [])
+                test_cases = result.get("test_cases", [])
+                # 确保 source_review_ids 被填充（LLM 可能遗漏）
+                req_map = {r.get("id"): r for r in requirements}
+                for tc in test_cases:
+                    tc["generated_by"] = "llm"
+                    if not tc.get("source_review_ids"):
+                        req = req_map.get(tc.get("requirement_id"), {})
+                        tc["source_review_ids"] = req.get("source_review_ids", [])[:3]
+                return test_cases
             except Exception:
                 return self._fallback_generate(requirements)
         else:
@@ -45,6 +54,7 @@ class TestCaseGenerator:
         for req in requirements:
             req_id = req.get("id", "")
             req_title = req.get("title", "")
+            source_rids = req.get("source_review_ids", [])
 
             test_cases.append({
                 "requirement_id": req_id,
@@ -52,8 +62,10 @@ class TestCaseGenerator:
                 "preconditions": "系统正常运行，用户已登录",
                 "given": "用户已完成前置条件",
                 "when": "执行需求相关操作",
-                "then": "功能按预期正常工作",
+                "then": "功能按预期正常工作，用户反馈的问题不再出现",
                 "type": "positive",
+                "source_review_ids": source_rids[:2],
+                "generated_by": "rule_based",
             })
 
             test_cases.append({
@@ -64,6 +76,8 @@ class TestCaseGenerator:
                 "when": "执行需求相关操作",
                 "then": "系统友好提示错误，不崩溃",
                 "type": "negative",
+                "source_review_ids": source_rids[:2],
+                "generated_by": "rule_based",
             })
 
         return test_cases

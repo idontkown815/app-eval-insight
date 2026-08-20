@@ -96,11 +96,7 @@ class PipelineOrchestrator:
                     )
             results["raw_reviews"] = raw_reviews
             results["data_source"] = data_source
-            results["data_fetch_note"] = (
-                "数据来源：App Store RSS Feed" if data_source == "live" and raw_reviews
-                else "数据来源：App Store 网页爬取" if data_source == "live"
-                else f"数据来源：本地缓存（{len(raw_reviews)} 条评价）"
-            )
+            results["data_fetch_note"] = self._build_data_note(raw_reviews, data_source)
             self.tracker.update(task_id, "data_collection", "completed")
         except Exception as e:
             self.tracker.update(task_id, "data_collection", "failed")
@@ -117,6 +113,9 @@ class PipelineOrchestrator:
                 "original_count": clean_result.get("original_count", 0),
                 "cleaned_count": clean_result.get("cleaned_count", 0),
                 "removed_count": clean_result.get("removed_count", 0),
+                "duplicate_content_removed": clean_result.get("duplicate_content_removed", 0),
+                "language_distribution": clean_result.get("language_distribution", {}),
+                "has_mixed_languages": clean_result.get("has_mixed_languages", False),
             }
             results["cleaning_report"] = clean_report
             self.tracker.update(task_id, "data_cleaning", "completed")
@@ -224,3 +223,41 @@ class PipelineOrchestrator:
             pass
 
         return results
+
+    @staticmethod
+    def _build_data_note(raw_reviews: list, data_source: str) -> str:
+        """构建数据来源和局限性的透明说明。"""
+        count = len(raw_reviews)
+        if not raw_reviews:
+            return "未获取到评价数据"
+
+        # 检查来源标记
+        sources = set()
+        for r in raw_reviews:
+            src = r.get("source", "")
+            if src:
+                sources.add(src)
+
+        if data_source == "cache":
+            return (
+                f"数据来源：本地缓存（{count} 条评价）。"
+                f"实时采集失败，使用上次缓存的数据。"
+                f"缓存可能已过期，建议稍后重试实时采集。"
+            )
+
+        if "rss" in sources and "web" not in sources:
+            return (
+                f"数据来源：Apple RSS Feed API（{count} 条评价）。"
+                f"这是 Apple 官方公开的评价数据接口，数据真实可重复。"
+            )
+
+        if "web" in sources or "rss" not in sources:
+            return (
+                f"数据来源：App Store 网页数据（{count} 条评价）。"
+                f"Apple RSS Feed API 对该应用未返回数据，"
+                f"通过解析 App Store 页面嵌入的 JSON 获取。"
+                f"局限性：页面通常只包含精选评价（最多约40条），"
+                f"不代表全部用户评价。如需更多数据，请使用文件导入功能。"
+            )
+
+        return f"数据来源：App Store（{count} 条评价）"

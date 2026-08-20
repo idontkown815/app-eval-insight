@@ -6,10 +6,6 @@ on:
       - 'v*'
   workflow_dispatch:
 
-env:
-  CSC_IDENTITY_AUTO_DISCOVERY: 'false'
-  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
 jobs:
   build:
     name: Build (${{ matrix.os }})
@@ -20,8 +16,11 @@ jobs:
           - os: windows-latest
             artifact_name: App-Review-Insight-windows-x64
             platform: win
-          - os: macos-latest
+          - os: macos-13
             artifact_name: App-Review-Insight-macos-x64
+            platform: mac
+          - os: macos-14
+            artifact_name: App-Review-Insight-macos-arm64
             platform: mac
     runs-on: ${{ matrix.os }}
 
@@ -49,33 +48,22 @@ jobs:
       - name: Build frontend
         working-directory: frontend
         run: |
-          node -e "require('fs').rmSync('package-lock.json', {force: true})"
           npm install
           npm run build
-
-      - name: Install desktop dependencies
-        working-directory: desktop
-        run: |
-          # Remove potentially corrupted lockfile and regenerate
-          node -e "require('fs').rmSync('package-lock.json', {force: true})"
-          npm install
-
-      - name: Verify build resources
-        working-directory: desktop
-        run: |
-          echo "Checking build resources..."
-          node create-icon.js
-          echo "Build resources check complete"
 
       - name: Build backend (PyInstaller)
         working-directory: desktop
         run: npm run build:backend
 
+      - name: Install desktop dependencies
+        working-directory: desktop
+        run: npm install
+
       - name: Build desktop installer
         working-directory: desktop
-        env:
-          CSC_IDENTITY_AUTO_DISCOVERY: 'false'
         run: npm run build:electron
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
@@ -84,6 +72,7 @@ jobs:
           path: |
             desktop/dist/*.exe
             desktop/dist/*.dmg
+            desktop/dist/latest*.yml
           if-no-files-found: warn
 
   release:

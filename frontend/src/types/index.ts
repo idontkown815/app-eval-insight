@@ -68,6 +68,8 @@ export interface Finding {
   is_hypothesis?: boolean;
   is_contradictory?: boolean;
   data_limitation?: string;
+  conflict_detail?: string;
+  generated_by?: 'llm' | 'rule_based';
 }
 
 export interface Requirement {
@@ -77,6 +79,9 @@ export interface Requirement {
   user_story: string;
   priority: 'P0' | 'P1' | 'P2';
   version_suggestion: 'V1' | 'V2';
+  acceptance_criteria?: string[];
+  source_review_ids?: string[];
+  generated_by?: 'llm' | 'rule_based';
 }
 
 export interface TestCase {
@@ -88,6 +93,8 @@ export interface TestCase {
   when: string;
   then: string;
   type: 'positive' | 'negative';
+  source_review_ids?: string[];
+  generated_by?: 'llm' | 'rule_based';
 }
 
 export interface VerificationIssue {
@@ -128,6 +135,8 @@ export interface TaskResults {
   cleaned_reviews?: any[];
   is_fallback?: boolean;
   data_source?: string;
+  data_fetch_note?: string;
+  llm_available?: boolean;
   cleaning_report?: any;
   error?: string;
   // 原始 API 响应中的嵌套字段

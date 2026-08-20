@@ -5,36 +5,25 @@
   "main": "main.js",
   "author": "App Review Insight",
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/idontkown815/app-eval-insight.git"
-  },
   "scripts": {
     "start": "electron .",
     "dev": "electron . --dev",
     "build:frontend": "cd ../frontend && npm install && npm run build",
-    "build:backend": "pyinstaller --noconfirm --distpath ../backend/dist --workpath ../backend/build backend.spec",
+    "build:backend": "pyinstaller --noconfirm --distpath ../backend/dist --workpath ../backend/build --specpath . backend.spec",
     "build:electron": "electron-builder",
     "build:all": "npm run build:frontend && npm run build:backend && npm run build:electron"
   },
   "build": {
     "appId": "com.appreviewinsight.desktop",
     "productName": "App Review Insight",
-    "asar": true,
     "directories": {
       "output": "dist",
       "buildResources": "build"
     },
-    "publish": {
-      "provider": "github",
-      "owner": "idontkown815",
-      "repo": "app-eval-insight"
-    },
     "files": [
       "main.js",
       "preload.js",
-      "package.json",
-      "build/**/*"
+      "package.json"
     ],
     "extraResources": [
       {
@@ -53,9 +42,7 @@
       }
     ],
     "win": {
-      "target": ["nsis"],
-      "icon": "build/icon.png",
-      "signingHashAlgorithms": []
+      "target": ["nsis"]
     },
     "nsis": {
       "oneClick": false,
@@ -67,9 +54,7 @@
     },
     "mac": {
       "target": ["dmg"],
-      "category": "public.app-category.developer-tools",
-      "hardenedRuntime": false,
-      "gatekeeperAssess": false
+      "category": "public.app-category.developer-tools"
     },
     "dmg": {
       "contents": [

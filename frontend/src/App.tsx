@@ -75,6 +75,8 @@ export default function App() {
               cleaned_reviews: r.cleaned_reviews || [],
               is_fallback: r.is_fallback,
               data_source: r.data_source,
+              data_fetch_note: r.data_fetch_note,
+              llm_available: r.llm_available,
               error: r.error,
             }
             setResults(flat); setStage('result'); return

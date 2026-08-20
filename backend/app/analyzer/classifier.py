@@ -48,7 +48,14 @@ class DynamicClassifier:
                 fallback_cats = self._fallback_classify(batch, focus_areas)
                 all_categories.extend(fallback_cats)
 
-        return self._merge_similar(all_categories)
+        merged = self._merge_similar(all_categories)
+        # 标记生成方式
+        for cat in merged:
+            if not self.llm_client.is_available():
+                cat["generated_by"] = "rule_based"
+            else:
+                cat["generated_by"] = "llm"
+        return merged
 
     def _format_reviews(self, reviews: list) -> str:
         lines = []

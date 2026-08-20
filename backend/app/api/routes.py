@@ -154,8 +154,10 @@ async def get_task_results(task_id: str):
         "task_id": task_id,
         "status": status,
         "data_source": result.get("data_source", ""),
+        "data_fetch_note": result.get("data_fetch_note", ""),
         "is_using_cache": result.get("data_source") == "cache",
         "is_fallback": result.get("is_fallback", False),
+        "llm_available": pipeline.llm_client.is_available(),
         "deliverables": deliverables,
         "error": result.get("error"),
     }
@@ -382,7 +384,7 @@ async def health_check():
     network_ok = False
     try:
         import requests
-        resp = requests.get("https://itunes.apple.com/lookup?id=364709193", timeout=5)
+        resp = requests.get("https://itunes.apple.com/search?term=test&entity=software&limit=1", timeout=5)
         network_ok = resp.status_code == 200
     except Exception:
         network_ok = False

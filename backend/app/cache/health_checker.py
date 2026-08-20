@@ -6,7 +6,10 @@ from app import config
 class HealthChecker:
     def check_network(self) -> bool:
         try:
-            response = requests.get("https://itunes.apple.com/lookup?id=839285684", timeout=5)
+            response = requests.get(
+                "https://itunes.apple.com/search?term=test&entity=software&limit=1",
+                timeout=5,
+            )
             return response.status_code == 200
         except requests.exceptions.RequestException:
             return False

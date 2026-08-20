@@ -21,6 +21,8 @@ class PRDGenerator:
   - user_story: 用户故事（格式：作为...我想要...以便...）
   - priority: 优先级（P0/P1/P2）
   - version_suggestion: 建议版本（V1/V2）
+  - acceptance_criteria: 验收标准数组（2-3条可验证的验收条件）
+  - source_review_ids: 来源评审ID数组（从对应finding的supporting_review_ids中选取）
 - version_plan: 版本规划对象，包含：
   - V1: V1版本核心内容描述
   - V2: V2版本增强内容描述
@@ -37,6 +39,7 @@ class PRDGenerator:
                 "title": f.get("title", ""),
                 "description": f.get("description", ""),
                 "strength": f.get("evidence_strength", "medium"),
+                "supporting_review_ids": f.get("supporting_review_ids", []),
             }
             for idx, f in enumerate(findings)
         ], ensure_ascii=False)
@@ -50,8 +53,19 @@ class PRDGenerator:
                         user_goal=user_goal or "未指定",
                     ),
                 )
+                reqs = result.get("requirements", [])
+                # 确保每条需求有 source_review_ids（LLM 可能遗漏）
+                for req in reqs:
+                    req["generated_by"] = "llm"
+                    if not req.get("source_review_ids"):
+                        fid = req.get("finding_id")
+                        for f in findings:
+                            f_id = f.get("id")
+                            if f_id is not None and str(fid) == str(f_id):
+                                req["source_review_ids"] = f.get("supporting_review_ids", [])
+                                break
                 return {
-                    "requirements": result.get("requirements", []),
+                    "requirements": reqs,
                     "version_plan": result.get("version_plan", {}),
                 }
             except Exception:
@@ -75,6 +89,7 @@ class PRDGenerator:
 
             title = f.get("title", f"发现{i+1}")
             finding_id = f.get("id") if f.get("id") is not None else i
+            review_ids = f.get("supporting_review_ids", [])
 
             requirements.append({
                 "id": f"REQ-{i+1:03d}",
@@ -83,6 +98,12 @@ class PRDGenerator:
                 "user_story": f"作为用户，我希望{title}得到解决，以便提升使用体验",
                 "priority": priority,
                 "version_suggestion": version_suggestion,
+                "acceptance_criteria": [
+                    f"相关用户反馈得到解决或缓解",
+                    f"支撑评价数（当前{len(review_ids)}条）不再增加",
+                ],
+                "source_review_ids": review_ids[:5],
+                "generated_by": "rule_based",
             })
 
         version_plan = {

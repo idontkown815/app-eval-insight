@@ -79,5 +79,23 @@
     "validity_days": 7,
     "status": "active",
     "filepath": "./data/cache\\reviews\\835599320_20260819T152730.json"
+  },
+  {
+    "cache_id": "835599320_20260820T141915",
+    "bundle_id": "835599320",
+    "collected_at": "2026-08-20T14:19:15.562063",
+    "review_count": 8,
+    "validity_days": 7,
+    "status": "active",
+    "filepath": "./data/cache\\reviews\\835599320_20260820T141915.json"
+  },
+  {
+    "cache_id": "839285684_20260820T143933",
+    "bundle_id": "839285684",
+    "collected_at": "2026-08-20T14:39:33.638150",
+    "review_count": 8,
+    "validity_days": 7,
+    "status": "active",
+    "filepath": "./data/cache\\reviews\\839285684_20260820T143933.json"
   }
 ]

@@ -1,8 +1,7 @@
 # -*- mode: python ; coding: utf-8 -*-
 # PyInstaller spec: 跨平台打包 Python 后端为单文件二进制
-# 用法: pyinstaller --noconfirm --distpath ../backend/dist --workpath ../backend/build backend.spec
+# 用法: pyinstaller --noconfirm --distpath ../backend/dist --workpath ../backend/build --specpath . backend.spec
 import os
-import platform
 from pathlib import Path
 from PyInstaller.utils.hooks import collect_submodules
 
@@ -10,34 +9,18 @@ from PyInstaller.utils.hooks import collect_submodules
 spec_dir = Path(SPECPATH).resolve()
 backend_dir = spec_dir.parent / 'backend'
 
-# 判断当前平台
-is_windows = platform.system() == 'Windows'
-is_mac = platform.system() == 'Darwin'
-
-# 要打包进二进制的样本数据（排除 cache 目录，体积过大且不需要）
-# 注意：app_review.db 是运行时生成的，CI 环境中可能不存在，需要过滤
-datas = []
-for src, dst in [
-    (backend_dir / 'data' / 'sample_reviews.csv', 'data'),
-    (backend_dir / 'data' / 'sample_reviews.json', 'data'),
-    (backend_dir / 'data' / 'db' / 'app_review.db', 'data/db'),
-    (backend_dir / '.env.example', '.'),
-]:
-    if src.exists():
-        datas.append((str(src), dst))
+# 要打包进二进制的样本数据
+datas = [
+    # 缓存的样本评价（首次启动复制到用户数据目录）
+    (str(backend_dir / 'data' / 'cache'), os.path.join('data', 'cache')),
+    (str(backend_dir / 'data' / 'sample_reviews.csv'), 'data'),
+    (str(backend_dir / 'data' / 'sample_reviews.json'), 'data'),
+    # 配置模板（Electron 启动时复制为 config.env）
+    (str(backend_dir / '.env.example'), '.'),
+]
 
 # 显式声明 app 包及其所有子模块，避免动态导入遗漏
-hiddenimports = [
-    'app',
-    'dotenv',
-    'dateutil',
-    'dateutil.parser',
-    'markdown',
-    'uvicorn.logging',
-    'uvicorn.lifespan.on',
-    'uvicorn.protocols.websockets',
-    'websockets',
-]
+hiddenimports = ['app', 'dotenv', 'uvicorn.logging', 'uvicorn.lifespan.on', 'uvicorn.protocols.websockets.auto']
 hiddenimports += collect_submodules('app')
 
 a = Analysis(
@@ -50,6 +33,7 @@ a = Analysis(
     hooksconfig={},
     runtime_hooks=[],
     excludes=[
+        # 排除无关的大型库，减小体积
         'tkinter', 'matplotlib', 'PyQt5', 'PySide2', 'PySide6',
         'IPython', 'notebook', 'jupyter', 'pytest',
     ],
@@ -59,7 +43,7 @@ a = Analysis(
 
 pyz = PYZ(a.pure)
 
-# onefile 模式：所有 binaries/datas 打进单个可执行文件
+# onefile 模式：所有 binaries/datas 打进单个 EXE
 exe = EXE(
     pyz,
     a.scripts,
@@ -70,13 +54,13 @@ exe = EXE(
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
-    upx=False,
-    upx_exclude=[] if not is_windows else [
+    upx=True,
+    upx_exclude=[
         'vcruntime140.dll', 'python3.dll', 'msvcp140.dll',
     ],
     runtime_tmpdir=None,
-    # CLI 模式：后端作为服务进程，需要控制台模式
-    console=True,
+    # GUI 模式：不显示控制台窗口（后端日志通过 run.py 重定向到文件）
+    console=False,
     disable_windowed_traceback=False,
     target_arch=None,
     codesign_identity=None,

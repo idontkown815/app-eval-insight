@@ -7,8 +7,10 @@
 - ✅ 10阶段全流程自动化工作流
 - ✅ LLM 驱动的**动态分类**（无硬编码类别）
 - ✅ 完整**追溯链**验证：结论→发现→需求→测试用例→原始评价
-- ✅ **离线缓存 + 降级分析**：网络/LLM 不可用时自动切换
+- ✅ **多源数据采集**：Apple RSS Feed API → Web 爬取 → 本地缓存
+- ✅ **离线缓存 + 降级分析**：网络/LLM 不可用时自动切换，缓存数据明确标识
 - ✅ CSV / Markdown / JSON 三种格式一键导出
+- ✅ 支持 JSON / CSV 文件导入评价数据，适配任意应用
 - ✅ 样本数据预置，零配置即可体验
 
 ## 🛠️ 技术栈
@@ -132,8 +134,64 @@ LLM_MODEL=gpt-4o-mini
 |------|------|
 | Facebook 评价缓存 | `backend/data/cache/reviews/284882215_sample.json` |
 | Instagram 评价缓存 | `backend/data/cache/reviews/389801252_sample.json` |
+| 实时采集缓存 | `backend/data/cache/reviews/{bundle_id}_{timestamp}.json` |
 | CSV 导入测试 | `backend/data/sample_reviews.csv` |
 | JSON 导入测试 | `backend/data/sample_reviews.json` |
+| 样本分析结果 | `backend/data/sample_output.json` |
+
+> **缓存数据说明**：所有缓存文件均为真实从 App Store 采集的数据，非伪造。
+> 文件名中带 `_sample` 后缀的为预置样本（用于离线演示），带时间戳的为实时采集缓存。
+> 系统始终优先尝试实时采集，仅在网络不可用时回退到缓存。缓存数据不会取代实时处理能力——
+> 当网络和模型配置可用时，系统会对任意未见过的 App Store 应用链接实时采集并分析。
+> 结果中通过 `data_source` 和 `data_fetch_note` 字段透明标识数据来源。
+
+## 📡 数据采集方法说明
+
+### 采集策略（多源降级）
+1. **Apple RSS Feed API**（首选）：`itunes.apple.com/us/rss/customerreviews/id={id}/json`
+   - Apple 官方公开的评价数据接口，数据真实可重复
+   - 局限性：近年来 Apple 逐步收紧该接口，对大量主流应用返回空数据
+2. **App Store Web 数据**（备选）：解析 `viewSoftware` 页面嵌入的 JSON
+   - 当 RSS 不可用时，通过 HTTP 请求获取 App Store 页面，解析其中嵌入的评论 JSON
+   - 局限性：页面通常只包含精选评价（最多约 40 条），不代表全部用户评价
+3. **本地缓存**（降级）：使用上次采集的真实数据
+   - 当网络不可用时自动回退，结果中标记 `data_source: "cache"`
+   - 缓存有效期默认 7 天（可配置 `CACHE_VALIDITY_DAYS`）
+4. **文件导入**（补充）：支持 JSON / CSV 格式导入第三方数据
+
+### 不依赖特定应用硬编码
+系统不绑定任何特定应用的 ID 或配置。任何美国 App Store 应用链接均可输入并分析。
+健康检查使用 Apple Search API 通用查询，不依赖特定应用。
+
+## 📥 JSON / CSV 导入格式
+
+### JSON 格式
+```json
+{
+  "reviews": [
+    {
+      "review_id": "unique_id_1",
+      "author": "用户名",
+      "rating": 5,
+      "title": "评价标题",
+      "content": "评价正文内容",
+      "review_date": "2026-08-15T08:30:00Z",
+      "version": "应用版本号（可选）"
+    }
+  ]
+}
+```
+
+### CSV 格式
+```csv
+review_id,author,rating,title,content,review_date,version
+r001,User1,5,"Great app","This is a great app!","2026-08-15T08:30:00Z",453
+r002,User2,1,"Crashes","App keeps crashing on startup","2026-08-14T10:00:00Z",453
+```
+
+**必填字段**：`review_id`、`rating`（1-5 整数）、`content`（非空文本）、`review_date`
+
+导入后系统自动执行完整分析流程（清洗 → 分类 → 发现 → PRD → 测试用例 → 追溯链）。
 
 ## 📜 License
 MIT
@@ -149,8 +207,10 @@ Input App Store link → auto collect, clean, classify, identify issues → outp
 - ✅ 10-stage fully automated workflow
 - ✅ LLM-powered **dynamic classification** (no hardcoded categories)
 - ✅ Complete **traceability chain** verification: conclusion → findings → requirements → test cases → original reviews
-- ✅ **Offline cache + fallback analysis**: auto switch when network/LLM unavailable
+- ✅ **Multi-source data collection**: Apple RSS Feed API → Web scraping → Local cache
+- ✅ **Offline cache + fallback analysis**: auto switch when network/LLM unavailable, cache data clearly marked
 - ✅ One-click export in CSV / Markdown / JSON formats
+- ✅ Supports JSON / CSV file import for review data, works with any app
 - ✅ Preloaded sample data, zero-config ready to experience
 
 ## 🛠️ Tech Stack
@@ -274,8 +334,65 @@ Auto fallback when not configured.
 |---------|------|
 | Facebook review cache | `backend/data/cache/reviews/284882215_sample.json` |
 | Instagram review cache | `backend/data/cache/reviews/389801252_sample.json` |
+| Live-collected cache | `backend/data/cache/reviews/{bundle_id}_{timestamp}.json` |
 | CSV import test | `backend/data/sample_reviews.csv` |
 | JSON import test | `backend/data/sample_reviews.json` |
+| Sample analysis output | `backend/data/sample_output.json` |
+
+> **Cache Data Note**: All cache files contain real data collected from App Store, not fabricated.
+> Files with `_sample` suffix are preloaded samples (for offline demo). Files with timestamps are live-collected caches.
+> The system always attempts live collection first, falling back to cache only when network is unavailable.
+> Cache does NOT replace live processing — when network and model config are available, the system processes
+> any unseen App Store app link in real time. Data source is transparently indicated via `data_source` and
+> `data_fetch_note` fields in results.
+
+## 📡 Data Collection Methods
+
+### Collection Strategy (Multi-source Fallback)
+1. **Apple RSS Feed API** (primary): `itunes.apple.com/us/rss/customerreviews/id={id}/json`
+   - Apple's official public review data interface, real and reproducible
+   - Limitation: Apple has gradually restricted this API, returning empty for many popular apps
+2. **App Store Web Data** (fallback): Parse embedded JSON from `viewSoftware` page
+   - When RSS unavailable, fetches App Store page via HTTP and parses embedded review JSON
+   - Limitation: Page typically contains only featured reviews (max ~40), not all user reviews
+3. **Local Cache** (degraded): Use previously collected real data
+   - Auto-fallback when network unavailable, marked with `data_source: "cache"` in results
+   - Cache validity default 7 days (configurable via `CACHE_VALIDITY_DAYS`)
+4. **File Import** (supplement): Support JSON / CSV format for third-party data
+
+### No Hardcoded App Dependencies
+The system does not bind to any specific app ID or configuration. Any US App Store app link can be input and analyzed.
+Health check uses Apple Search API generic query, not tied to any specific app.
+
+## 📥 JSON / CSV Import Format
+
+### JSON Format
+```json
+{
+  "reviews": [
+    {
+      "review_id": "unique_id_1",
+      "author": "username",
+      "rating": 5,
+      "title": "Review title",
+      "content": "Review body text",
+      "review_date": "2026-08-15T08:30:00Z",
+      "version": "app version (optional)"
+    }
+  ]
+}
+```
+
+### CSV Format
+```csv
+review_id,author,rating,title,content,review_date,version
+r001,User1,5,"Great app","This is a great app!","2026-08-15T08:30:00Z",453
+r002,User2,1,"Crashes","App keeps crashing on startup","2026-08-14T10:00:00Z",453
+```
+
+**Required fields**: `review_id`, `rating` (integer 1-5), `content` (non-empty text), `review_date`
+
+After import, the system runs the full analysis pipeline (clean → classify → findings → PRD → test cases → traceability).
 
 ## 📜 License
 MIT

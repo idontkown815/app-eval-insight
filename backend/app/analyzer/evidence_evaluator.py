@@ -25,6 +25,13 @@ class EvidenceEvaluator:
             has_high = any(r >= 4 for r in ratings)
             has_low = any(r <= 2 for r in ratings)
             finding["is_contradictory"] = has_high and has_low
+            if has_high and has_low:
+                high_count = sum(1 for r in ratings if r >= 4)
+                low_count = sum(1 for r in ratings if r <= 2)
+                finding["conflict_detail"] = (
+                    f"该发现存在矛盾反馈：{high_count} 条好评（4-5星）vs "
+                    f"{low_count} 条差评（1-2星），需进一步调查"
+                )
 
             if count < self.MIN_EVIDENCE:
                 finding["data_limitation"] = "支撑评价不足"

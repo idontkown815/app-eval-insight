@@ -6,7 +6,7 @@ import { exportResults } from '../api/client'
 import {
   Download, FileText, CheckCircle2, AlertTriangle, XCircle,
   Lightbulb, ListChecks, ShieldCheck, ThumbsUp, ThumbsDown,
-  ChevronDown, ChevronRight, Tag, Clock
+  ChevronDown, ChevronRight, Tag, Clock, Database, GitBranch, Cpu, Globe
 } from 'lucide-react'
 
 interface Props {
@@ -16,7 +16,7 @@ interface Props {
   userGoal: string
 }
 
-type Tab = 'overview' | 'categories' | 'findings' | 'prd' | 'tests' | 'verification'
+type Tab = 'overview' | 'categories' | 'findings' | 'prd' | 'tests' | 'verification' | 'traceability'
 
 const TABS: { id: Tab; label: string; icon: any }[] = [
   { id: 'overview', label: '总览', icon: FileText },
@@ -24,6 +24,7 @@ const TABS: { id: Tab; label: string; icon: any }[] = [
   { id: 'findings', label: '关键发现', icon: Lightbulb },
   { id: 'prd', label: 'PRD 需求', icon: ListChecks },
   { id: 'tests', label: '测试用例', icon: ShieldCheck },
+  { id: 'traceability', label: '追溯链', icon: GitBranch },
   { id: 'verification', label: '验证报告', icon: CheckCircle2 },
 ]
 
@@ -169,6 +170,69 @@ export default function ResultPanel({ taskId, results, appInfo, userGoal }: Prop
                 <StatCard label="测试用例" value={testCaseCount} sub={`${requirementCount} 条需求`} color="orange" />
               </div>
 
+              {/* 数据来源与局限性透明说明 */}
+              <Section title="📊 数据来源与局限性" desc="真实数据来源、采集方式和已知局限">
+                <div className="space-y-3">
+                  <div className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg border border-gray-200">
+                    <Database className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" />
+                    <div className="flex-1">
+                      <p className="text-sm text-gray-800">{results.data_fetch_note || '数据来源未记录'}</p>
+                      {results.data_source === 'cache' && (
+                        <p className="text-xs text-amber-600 mt-1">⚠ 当前使用缓存数据，可能已过期</p>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* 清洗报告 */}
+                  {results.cleaning_report && (
+                    <div className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg border border-gray-200">
+                      <FileText className="w-5 h-5 text-gray-500 flex-shrink-0 mt-0.5" />
+                      <div className="flex-1 text-sm">
+                        <div className="flex flex-wrap gap-3 text-gray-700">
+                          <span>原始：<b>{results.cleaning_report.original_count}</b> 条</span>
+                          <span>清洗后：<b className="text-blue-600">{results.cleaning_report.cleaned_count}</b> 条</span>
+                          <span>移除：<b className="text-red-500">{results.cleaning_report.removed_count}</b> 条</span>
+                          {results.cleaning_report.duplicate_content_removed > 0 && (
+                            <span>内容重复：<b className="text-orange-500">{results.cleaning_report.duplicate_content_removed}</b> 条</span>
+                          )}
+                        </div>
+                        {results.cleaning_report.has_mixed_languages && (
+                          <div className="mt-2 flex items-center gap-2 text-xs text-purple-600">
+                            <Globe className="w-3.5 h-3.5" />
+                            检测到混合语言：
+                            {Object.entries(results.cleaning_report.language_distribution || {}).map(([lang, count]) => (
+                              <span key={lang} className="px-1.5 py-0.5 bg-purple-100 rounded">{lang}: {count as number}</span>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* LLM / 规则模式标记 */}
+                  <div className="flex items-start gap-3 p-3 rounded-lg border ${
+                    results.llm_available === false ? 'bg-amber-50 border-amber-200' : 'bg-green-50 border-green-200'
+                  }" style={{ background: results.llm_available === false ? '#fffbeb' : '#f0fdf4', borderColor: results.llm_available === false ? '#fde68a' : '#bbf7d0' }}>
+                    <Cpu className={`w-5 h-5 flex-shrink-0 mt-0.5 ${results.llm_available === false ? 'text-amber-500' : 'text-green-500'}`} />
+                    <div className="flex-1">
+                      <p className="text-sm font-medium text-gray-800">
+                        {results.llm_available === false
+                          ? '⚠ 当前为规则降级模式（未配置 LLM API Key）'
+                          : '✓ 模型驱动语义分析已启用'}
+                      </p>
+                      <p className="text-xs text-gray-600 mt-1">
+                        {results.llm_available === false
+                          ? '分类、发现、PRD、测试用例均由规则引擎生成。请在 .env 中配置 LLM_API_KEY 以启用 AI 语义分析。'
+                          : `使用 LLM 模型进行分析，每个结果项标注了生成方式（LLM/规则）。`}
+                      </p>
+                      {results.is_fallback && (
+                        <p className="text-xs text-amber-600 mt-1">部分分析因 LLM 异常降级为规则</p>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </Section>
+
               {results.goal_analysis && (
                 <Section title="🎯 目标分析" desc="根据分析目标自动识别的关注方向">
                   <div className="grid md:grid-cols-2 gap-4">
@@ -267,6 +331,10 @@ export default function ResultPanel({ taskId, results, appInfo, userGoal }: Prop
             </div>
           )}
 
+          {tab === 'traceability' && (
+            <TraceabilityView results={results} />
+          )}
+
           {tab === 'verification' && (
             results.verification ? (
               <VerificationBlock v={results.verification} />
@@ -354,6 +422,7 @@ function FindingCard({ finding, expanded, onToggle }: { finding: Finding; expand
             </span>
             {finding.is_hypothesis && <span className="text-xs px-2 py-0.5 rounded-full bg-purple-100 text-purple-700">假设</span>}
             {finding.is_contradictory && <span className="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-700">矛盾</span>}
+            <GeneratedByBadge by={finding.generated_by} />
           </div>
           <p className="text-sm text-gray-600 line-clamp-2">{finding.description}</p>
           <p className="text-xs text-gray-500 mt-2">{finding.supporting_review_ids.length} 条支持评价</p>
@@ -385,6 +454,12 @@ function FindingCard({ finding, expanded, onToggle }: { finding: Finding; expand
               <p className="text-sm text-yellow-900">{finding.data_limitation}</p>
             </div>
           )}
+          {finding.conflict_detail && (
+            <div className="mt-3 p-3 bg-amber-50 rounded-lg border border-amber-200">
+              <p className="text-xs font-medium text-amber-700 mb-1">⚠️ 矛盾反馈</p>
+              <p className="text-sm text-amber-900">{finding.conflict_detail}</p>
+            </div>
+          )}
         </div>
       )}
     </div>
@@ -402,10 +477,26 @@ function RequirementCard({ req }: { req: Requirement }) {
         {req.finding_id != null && (
           <span className="text-xs px-2 py-0.5 bg-gray-100 text-gray-600 rounded-full">关联发现 #{req.finding_id}</span>
         )}
+        <GeneratedByBadge by={req.generated_by} />
       </div>
       <p className="text-sm text-gray-700 bg-gray-50 p-3 rounded-lg border border-gray-100">
         <span className="font-medium">用户故事：</span>{req.user_story}
       </p>
+      {req.acceptance_criteria && req.acceptance_criteria.length > 0 && (
+        <div className="mt-2 p-3 bg-blue-50 rounded-lg border border-blue-100">
+          <p className="text-xs font-medium text-blue-700 mb-1">验收标准</p>
+          <ul className="space-y-1">
+            {req.acceptance_criteria.map((c, i) => (
+              <li key={i} className="text-xs text-gray-700 flex items-start gap-1">
+                <span className="text-blue-500 flex-shrink-0">✓</span> {c}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+      {req.source_review_ids && req.source_review_ids.length > 0 && (
+        <p className="text-xs text-gray-500 mt-2">追溯至 {req.source_review_ids.length} 条用户评价</p>
+      )}
     </div>
   )
 }
@@ -421,6 +512,7 @@ function TestCaseCard({ tc }: { tc: TestCase }) {
         </span>
         <span className="text-xs font-mono px-2 py-0.5 bg-gray-100 rounded">需求: {tc.requirement_id}</span>
         <h4 className="font-semibold text-gray-900 flex-1">{tc.title}</h4>
+        <GeneratedByBadge by={tc.generated_by} />
       </div>
       <div className="grid gap-2 text-sm">
         {tc.preconditions && (
@@ -443,6 +535,12 @@ function TestCaseCard({ tc }: { tc: TestCase }) {
           <span className="text-xs font-medium text-gray-500 w-24 flex-shrink-0">Then</span>
           <span className="text-gray-700 bg-green-50 p-2 rounded flex-1">{tc.then}</span>
         </div>
+        {tc.source_review_ids && tc.source_review_ids.length > 0 && (
+          <div className="flex gap-2">
+            <span className="text-xs font-medium text-gray-500 w-24 flex-shrink-0">追溯</span>
+            <span className="text-xs text-gray-500 flex-1">来自 {tc.source_review_ids.length} 条用户评价</span>
+          </div>
+        )}
       </div>
     </div>
   )
@@ -509,5 +607,154 @@ function VerificationBlock({ v }: { v: Verification }) {
 function EmptyState({ text }: { text: string }) {
   return (
     <div className="py-16 text-center text-gray-400 text-sm">{text}</div>
+  )
+}
+
+function GeneratedByBadge({ by }: { by?: string }) {
+  if (!by) return null
+  const isLLM = by === 'llm'
+  return (
+    <span className={`text-xs px-1.5 py-0.5 rounded-full font-medium ${
+      isLLM ? 'bg-indigo-100 text-indigo-700' : 'bg-gray-100 text-gray-500'
+    }`}>
+      {isLLM ? 'AI' : '规则'}
+    </span>
+  )
+}
+
+function TraceabilityView({ results }: { results: TaskResults }) {
+  const reviews = results.cleaned_reviews || []
+  const reviewMap = new Map(reviews.map(r => [r.review_id, r]))
+  const findings = results.findings || []
+  const requirements = results.prd?.requirements || []
+  const testCases = results.test_cases || []
+
+  return (
+    <div className="space-y-4">
+      <div className="p-4 bg-blue-50 rounded-xl border border-blue-200">
+        <div className="flex items-center gap-2 mb-2">
+          <GitBranch className="w-5 h-5 text-blue-600" />
+          <h3 className="font-semibold text-blue-900">追溯链：评价 → 发现 → 需求 → 测试用例</h3>
+        </div>
+        <p className="text-sm text-blue-700">
+          展示从用户评价到测试用例的完整追溯链。每条需求可追溯到具体的用户评价，确保产品决策基于真实用户反馈。
+        </p>
+      </div>
+
+      {requirements.map((req) => {
+        const finding = findings.find((f, i) => {
+          const fid = f.id ?? i
+          return String(fid) === String(req.finding_id)
+        })
+        const findingReviewIds = finding?.supporting_review_ids || []
+        const reqReviewIds = req.source_review_ids || findingReviewIds
+        const linkedTestCases = testCases.filter(tc => tc.requirement_id === req.id)
+
+        return (
+          <div key={req.id} className="border border-gray-200 rounded-xl overflow-hidden">
+            <div className="p-4 bg-gray-50 border-b border-gray-200">
+              <div className="flex items-center gap-2 flex-wrap">
+                <span className="text-xs font-mono px-2 py-0.5 bg-gray-200 rounded">{req.id}</span>
+                <span className="font-semibold text-gray-900">{req.title}</span>
+                <span className={`text-xs px-2 py-0.5 rounded-full border ${PRIORITY_STYLE[req.priority]}`}>{req.priority}</span>
+                <span className="text-xs px-2 py-0.5 bg-indigo-100 text-indigo-700 rounded-full">{req.version_suggestion}</span>
+                <GeneratedByBadge by={req.generated_by} />
+              </div>
+            </div>
+
+            <div className="p-4 space-y-3">
+              {/* 追溯到发现 */}
+              {finding && (
+                <div className="flex items-start gap-2">
+                  <Lightbulb className="w-4 h-4 text-yellow-500 flex-shrink-0 mt-0.5" />
+                  <div className="flex-1">
+                    <p className="text-xs text-gray-500">关键发现</p>
+                    <p className="text-sm text-gray-800">{finding.title}</p>
+                    <div className="flex gap-2 mt-1">
+                      <span className={`text-xs px-1.5 py-0.5 rounded-full border ${EVIDENCE_STYLE[finding.evidence_strength]}`}>
+                        证据{finding.evidence_strength === 'strong' ? '强' : finding.evidence_strength === 'medium' ? '中' : '弱'}
+                      </span>
+                      {finding.is_contradictory && <span className="text-xs px-1.5 py-0.5 rounded-full bg-amber-100 text-amber-700">矛盾</span>}
+                      <GeneratedByBadge by={finding.generated_by} />
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* 追溯到原始评价 */}
+              {reqReviewIds.length > 0 && (
+                <div className="flex items-start gap-2">
+                  <FileText className="w-4 h-4 text-blue-500 flex-shrink-0 mt-0.5" />
+                  <div className="flex-1">
+                    <p className="text-xs text-gray-500">来源用户评价（{reqReviewIds.length} 条）</p>
+                    <div className="space-y-1 mt-1">
+                      {reqReviewIds.slice(0, 3).map((rid, i) => {
+                        const review = reviewMap.get(rid)
+                        return (
+                          <div key={i} className="text-xs p-2 bg-gray-50 rounded border-l-2 border-blue-400">
+                            {review ? (
+                              <>
+                                <span className="text-gray-500">[{review.rating}★]</span>{' '}
+                                <span className="text-gray-700">{review.content?.slice(0, 120)}{review.content?.length > 120 ? '...' : ''}</span>
+                                {review.language && review.language !== 'en' && (
+                                  <span className="ml-1 px-1 py-0.5 bg-purple-100 text-purple-600 rounded text-[10px]">{review.language}</span>
+                                )}
+                              </>
+                            ) : (
+                              <span className="text-gray-400">评价 ID: {rid}</span>
+                            )}
+                          </div>
+                        )
+                      })}
+                      {reqReviewIds.length > 3 && <p className="text-xs text-gray-400">... 还有 {reqReviewIds.length - 3} 条</p>}
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* 追溯到测试用例 */}
+              {linkedTestCases.length > 0 && (
+                <div className="flex items-start gap-2">
+                  <ShieldCheck className="w-4 h-4 text-green-500 flex-shrink-0 mt-0.5" />
+                  <div className="flex-1">
+                    <p className="text-xs text-gray-500">关联测试用例（{linkedTestCases.length} 条）</p>
+                    <div className="space-y-1 mt-1">
+                      {linkedTestCases.map((tc, i) => (
+                        <div key={i} className="text-xs p-2 bg-green-50 rounded border-l-2 border-green-400">
+                          <span className={`px-1.5 py-0.5 rounded ${tc.type === 'positive' ? 'bg-green-200 text-green-700' : 'bg-red-200 text-red-700'}`}>
+                            {tc.type === 'positive' ? '正向' : '反向'}
+                          </span>{' '}
+                          <span className="text-gray-700">{tc.title}</span>
+                          <GeneratedByBadge by={tc.generated_by} />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* 验收标准 */}
+              {req.acceptance_criteria && req.acceptance_criteria.length > 0 && (
+                <div className="flex items-start gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-blue-500 flex-shrink-0 mt-0.5" />
+                  <div className="flex-1">
+                    <p className="text-xs text-gray-500">验收标准</p>
+                    <ul className="mt-1 space-y-1">
+                      {req.acceptance_criteria.map((c, i) => (
+                        <li key={i} className="text-xs text-gray-700 flex items-start gap-1">
+                          <span className="text-blue-500 flex-shrink-0">✓</span> {c}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        )
+      })}
+
+      {!requirements.length && <EmptyState text="暂无追溯链数据" />}
+    </div>
   )
 }

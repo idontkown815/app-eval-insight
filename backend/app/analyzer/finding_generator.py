@@ -49,9 +49,14 @@ class FindingGenerator:
                 ),
             )
             findings = result.get("findings", [])
+            for f in findings:
+                f["generated_by"] = "llm"
             return findings
         except Exception:
-            return self._fallback_findings(categories, reviews)
+            findings = self._fallback_findings(categories, reviews)
+            for f in findings:
+                f["generated_by"] = "rule_based"
+            return findings
 
     def _fallback_findings(self, categories: list, reviews: list) -> list:
         review_map = {r.get("review_id"): r for r in reviews}
