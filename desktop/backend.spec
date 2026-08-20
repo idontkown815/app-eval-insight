@@ -15,12 +15,16 @@ is_windows = platform.system() == 'Windows'
 is_mac = platform.system() == 'Darwin'
 
 # 要打包进二进制的样本数据（排除 cache 目录，体积过大且不需要）
-datas = [
-    (str(backend_dir / 'data' / 'sample_reviews.csv'), 'data'),
-    (str(backend_dir / 'data' / 'sample_reviews.json'), 'data'),
-    (str(backend_dir / 'data' / 'db' / 'app_review.db'), 'data/db'),
-    (str(backend_dir / '.env.example'), '.'),
-]
+# 注意：app_review.db 是运行时生成的，CI 环境中可能不存在，需要过滤
+datas = []
+for src, dst in [
+    (backend_dir / 'data' / 'sample_reviews.csv', 'data'),
+    (backend_dir / 'data' / 'sample_reviews.json', 'data'),
+    (backend_dir / 'data' / 'db' / 'app_review.db', 'data/db'),
+    (backend_dir / '.env.example', '.'),
+]:
+    if src.exists():
+        datas.append((str(src), dst))
 
 # 显式声明 app 包及其所有子模块，避免动态导入遗漏
 hiddenimports = [
