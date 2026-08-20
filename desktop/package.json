@@ -5,6 +5,10 @@
   "main": "main.js",
   "author": "App Review Insight",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/idontkown815/app-eval-insight.git"
+  },
   "scripts": {
     "start": "electron .",
     "dev": "electron . --dev",
@@ -20,6 +24,11 @@
     "directories": {
       "output": "dist",
       "buildResources": "build"
+    },
+    "publish": {
+      "provider": "github",
+      "owner": "idontkown815",
+      "repo": "app-eval-insight"
     },
     "files": [
       "main.js",
